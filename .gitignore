@@ -1,0 +1,8 @@
+build/
+dist/
+debug/
+nbproject/private/
+*.o
+*.elf
+*.map
+*.log
