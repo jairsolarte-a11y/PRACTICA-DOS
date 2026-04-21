@@ -1,0 +1,745 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta> <reloc>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+init CODE 0 7FFC 7FFC 4 1 2
+reset_vec CODE 0 0 0 4 1 2
+config CONFIG 4 300000 300000 E 1 1
+$dist/default/production\sensor_LDR.X.production.o
+cinit CODE 0 1028 1028 A 1 2
+text0 CODE 0 C98 C98 90 1 2
+text1 CODE 0 C02 C02 96 1 2
+text2 CODE 0 9F4 9F4 B6 1 2
+text3 CODE 0 E04 E04 64 1 2
+text4 CODE 0 D28 D28 72 1 2
+text5 CODE 0 E68 E68 5E 1 2
+text6 CODE 0 876 876 17E 1 2
+text7 CODE 0 D9A D9A 6A 1 2
+text8 CODE 0 B5E B5E A4 1 2
+text9 CODE 0 AAA AAA B4 1 2
+text10 CODE 0 EC6 EC6 3A 1 2
+text11 CODE 0 F5E F5E 20 1 2
+text12 CODE 0 F7E F7E 1E 1 2
+text13 CODE 0 F9C F9C 1E 1 2
+text14 CODE 0 FBA FBA 1C 1 2
+text15 CODE 0 FD6 FD6 16 1 2
+text16 CODE 0 FEC FEC 16 1 2
+text17 CODE 0 F38 F38 26 1 2
+text18 CODE 0 1002 1002 16 1 2
+text19 CODE 0 F00 F00 38 1 2
+text20 CODE 0 1018 1018 10 1 2
+cstackCOMRAM COMRAM 1 1 1 20 1 1
+smallconst SMALLCONST 0 800 800 76 1 2
+config CONFIG 4 300000 300000 E 1 1
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 60-7FF 1
+SFR F60-FFF 1
+BANK0 60-FF 1
+BANK1 100-1FF 1
+BANK2 200-2FF 1
+BANK3 300-3FF 1
+BANK4 400-4FF 1
+BANK5 500-5FF 1
+BANK6 600-6FF 1
+BANK7 700-7FF 1
+CONST 4-7FF 1
+CONST 1032-7FFB 1
+IDLOC 200000-200007 1
+SMALLCONST 1032-7FFB 1
+CODE 4-7FF 1
+CODE 1032-7FFB 1
+BIGRAM 21-7FF 1
+BIGSFR F60-FFF 1
+COMRAM 21-5F 1
+EEDATA F00000-F000FF 1
+MEDIUMCONST 1032-7FFB 1
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/production\sensor_LDR.X.production.o
+1018 text20 CODE >221:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1018 text20 CODE >222:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+101C text20 CODE >223:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1020 text20 CODE >224:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1024 text20 CODE >225:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1026 text20 CODE >226:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F00 text19 CODE >228:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F02 text19 CODE >229:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F06 text19 CODE >231:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F0A text19 CODE >232:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F12 text19 CODE >234:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F1A text19 CODE >236:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F1C text19 CODE >237:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F2A text19 CODE >239:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F36 text19 CODE >240:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1002 text18 CODE >91:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1002 text18 CODE >92:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1006 text18 CODE >94:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+100A text18 CODE >95:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+100E text18 CODE >96:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1010 text18 CODE >97:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1014 text18 CODE >98:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1016 text18 CODE >99:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F38 text17 CODE >101:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F38 text17 CODE >102:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F5C text17 CODE >103:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FEC text16 CODE >105:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FEC text16 CODE >106:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FF0 text16 CODE >107:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FF2 text16 CODE >108:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1000 text16 CODE >109:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FD6 text15 CODE >111:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FD6 text15 CODE >112:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FDA text15 CODE >113:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FDC text15 CODE >114:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FEA text15 CODE >115:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FBA text14 CODE >117:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FBC text14 CODE >118:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FC0 text14 CODE >119:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FC4 text14 CODE >120:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FD2 text14 CODE >121:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FD4 text14 CODE >122:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F9C text13 CODE >133:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F9E text13 CODE >134:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FA2 text13 CODE >135:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FA8 text13 CODE >136:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FAE text13 CODE >137:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FB4 text13 CODE >138:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+FB8 text13 CODE >139:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F7E text12 CODE >125:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F80 text12 CODE >126:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F84 text12 CODE >127:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F8A text12 CODE >128:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F90 text12 CODE >129:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F96 text12 CODE >130:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F9A text12 CODE >131:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F5E text11 CODE >164:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F60 text11 CODE >165:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F68 text11 CODE >166:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F70 text11 CODE >167:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+F7C text11 CODE >168:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+EC6 text10 CODE >170:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+EC6 text10 CODE >172:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+EC8 text10 CODE >173:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+ED2 text10 CODE >174:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+ED4 text10 CODE >175:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+EDA text10 CODE >176:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+EEC text10 CODE >177:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+EFE text10 CODE >178:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AAA text9 CODE >141:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AAA text9 CODE >142:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AC2 text9 CODE >144:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AC8 text9 CODE >145:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AD4 text9 CODE >146:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AE0 text9 CODE >147:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AEC text9 CODE >148:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AF2 text9 CODE >149:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AFE text9 CODE >150:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B0A text9 CODE >151:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B10 text9 CODE >152:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B16 text9 CODE >153:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B22 text9 CODE >154:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B2E text9 CODE >155:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B3A text9 CODE >156:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B46 text9 CODE >157:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B4C text9 CODE >158:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B52 text9 CODE >159:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B58 text9 CODE >161:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B5C text9 CODE >162:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+B5E text8 CODE >7:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+B5E text8 CODE >13:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+B6E text8 CODE >14:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+B84 text8 CODE >15:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+B88 text8 CODE >16:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+B8C text8 CODE >17:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+B96 text8 CODE >18:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+B98 text8 CODE >16:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BA6 text8 CODE >21:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BB0 text8 CODE >22:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BCE text8 CODE >23:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BDE text8 CODE >24:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BE0 text8 CODE >26:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BEA text8 CODE >27:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BF0 text8 CODE >28:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+BF0 text8 CODE >29:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+C00 text8 CODE >30:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
+D9A text7 CODE >15:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+D9A text7 CODE >119:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+DAA text7 CODE >121:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+DB8 text7 CODE >122:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+DC8 text7 CODE >123:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+DD2 text7 CODE >124:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+DDC text7 CODE >125:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+DF2 text7 CODE >128:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+E02 text7 CODE >129:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
+876 text6 CODE >180:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+878 text6 CODE >181:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+878 text6 CODE >184:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+87C text6 CODE >185:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+884 text6 CODE >186:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+88C text6 CODE >187:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+894 text6 CODE >188:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+89C text6 CODE >189:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8A4 text6 CODE >190:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8AC text6 CODE >191:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8B4 text6 CODE >192:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8BC text6 CODE >193:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8C4 text6 CODE >194:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8CC text6 CODE >195:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8D4 text6 CODE >196:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8DC text6 CODE >197:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8E4 text6 CODE >198:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8EC text6 CODE >199:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8F4 text6 CODE >200:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+8FC text6 CODE >201:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+904 text6 CODE >202:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+90C text6 CODE >203:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+914 text6 CODE >204:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+91C text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+920 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+928 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+930 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+938 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+940 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+948 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+950 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+958 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+960 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+968 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+970 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+978 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+980 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+988 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+990 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+998 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9A0 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9A8 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9B0 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9B8 text6 CODE >206:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9C2 text6 CODE >208:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9C4 text6 CODE >209:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9DA text6 CODE >210:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9EC text6 CODE >211:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9F2 text6 CODE >212:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+E68 text5 CODE >214:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+E68 text5 CODE >215:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+E6C text5 CODE >216:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+E94 text5 CODE >215:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+EC4 text5 CODE >218:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+D28 text4 CODE >7:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D28 text4 CODE >13:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D2E text4 CODE >14:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D40 text4 CODE >15:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D44 text4 CODE >16:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D48 text4 CODE >17:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D4E text4 CODE >18:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D50 text4 CODE >16:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D5E text4 CODE >21:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D64 text4 CODE >22:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D7A text4 CODE >23:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D82 text4 CODE >24:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D84 text4 CODE >26:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D8A text4 CODE >27:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D90 text4 CODE >28:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D90 text4 CODE >29:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+D98 text4 CODE >30:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwdiv.c
+E04 text3 CODE >7:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E04 text3 CODE >12:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E16 text3 CODE >13:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E1A text3 CODE >14:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E1E text3 CODE >15:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E24 text3 CODE >16:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E26 text3 CODE >14:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E34 text3 CODE >19:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E4A text3 CODE >20:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E52 text3 CODE >21:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E58 text3 CODE >22:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E5E text3 CODE >23:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E5E text3 CODE >24:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+E66 text3 CODE >25:C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
+9F4 text2 CODE >243:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9F4 text2 CODE >245:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+9F8 text2 CODE >247:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A0A text2 CODE >248:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A14 text2 CODE >249:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A24 text2 CODE >254:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A46 text2 CODE >255:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A60 text2 CODE >253:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A76 text2 CODE >259:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A8E text2 CODE >258:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+A9E text2 CODE >261:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+AA8 text2 CODE >262:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C02 text1 CODE >264:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C02 text1 CODE >267:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C06 text1 CODE >269:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C10 text1 CODE >270:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C20 text1 CODE >272:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C2A text1 CODE >273:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C3A text1 CODE >274:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C4A text1 CODE >275:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C54 text1 CODE >277:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C5E text1 CODE >278:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C6E text1 CODE >279:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C7C text1 CODE >280:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C86 text1 CODE >281:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C96 text1 CODE >282:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C98 text0 CODE >285:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+C98 text0 CODE >285:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C98 text0 CODE >289:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+C9C text0 CODE >290:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+CA0 text0 CODE >291:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+CA4 text0 CODE >293:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+CA4 text0 CODE >294:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+CB2 text0 CODE >295:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+CFA text0 CODE >297:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+D0A text0 CODE >298:C:\2026\Microcontroladores\Practica2\sensor_LDR.X\main.c
+1028 cinit CODE >845:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+1028 cinit CODE >847:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+1028 cinit CODE >850:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+1028 cinit CODE >856:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+1028 cinit CODE >859:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+102A cinit CODE >860:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+102C cinit CODE >861:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+102E cinit CODE >862:C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_1.s
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+___lwmod@counter 5 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\sensor_LDR.X.production.o
+__Hspace_0 8000 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Hspace_1 21 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Hspace_2 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Hspace_4 60000E 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Hibigdata 0 0 CODE 0 ibigdata dist/default/production\sensor_LDR.X.production.o
+__mediumconst 800 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_percent 85B 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\sensor_LDR.X.production.o
+__L__absolute__ 0 0 ABS 0 __absolute__ dist/default/production\sensor_LDR.X.production.o
+__end_of_I2C_Start 1002 0 CODE 0 text16 dist/default/production\sensor_LDR.X.production.o
+__end_of_I2C_Write FD6 0 CODE 0 text14 dist/default/production\sensor_LDR.X.production.o
+__Lsmallconst 800 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+___sp 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+_main C98 0 CODE 0 text0 dist/default/production\sensor_LDR.X.production.o
+___stack_hi 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+___stack_lo 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+start 7FFC 0 CODE 0 init C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+?___lmul 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+OLED_Clear@page 7 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+_I2C_Start FEC 0 CODE 0 text16 dist/default/production\sensor_LDR.X.production.o
+__Hpowerup 0 0 CODE 0 powerup dist/default/production\sensor_LDR.X.production.o
+_I2C_Write FBA 0 CODE 0 text14 dist/default/production\sensor_LDR.X.production.o
+main@percent 1E 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__end_of_OLED_Char 9F4 0 CODE 0 text6 dist/default/production\sensor_LDR.X.production.o
+__end_of_OLED_Data FBA 0 CODE 0 text13 dist/default/production\sensor_LDR.X.production.o
+__end_of_OLED_Init B5E 0 CODE 0 text9 dist/default/production\sensor_LDR.X.production.o
+__accesstop 60 0 ABS 0 - C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+intlevel0 0 0 CODE 0 text C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+intlevel1 0 0 CODE 0 text C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+intlevel2 0 0 CODE 0 text C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+intlevel3 0 0 CODE 0 text C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+__LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\sensor_LDR.X.production.o
+__Hifardata 0 0 CODE 0 ifardata dist/default/production\sensor_LDR.X.production.o
+__Hclrtext 0 0 ABS 0 clrtext dist/default/production\sensor_LDR.X.production.o
+_OLED_Char 876 0 CODE 0 text6 dist/default/production\sensor_LDR.X.production.o
+_OLED_Data F9C 0 CODE 0 text13 dist/default/production\sensor_LDR.X.production.o
+_OLED_Init AAA 0 CODE 0 text9 dist/default/production\sensor_LDR.X.production.o
+__end_of_font_percent 860 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_ADCON0 FC2 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_ADCON1 FC1 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_ADCON2 FC0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_ADRESH FC4 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_ADRESL FC3 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+_I2C_Init 1002 0 CODE 0 text18 dist/default/production\sensor_LDR.X.production.o
+_I2C_Stop FD6 0 CODE 0 text15 dist/default/production\sensor_LDR.X.production.o
+_I2C_Wait F38 0 CODE 0 text17 dist/default/production\sensor_LDR.X.production.o
+__Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\sensor_LDR.X.production.o
+__end_of___lmul E04 0 CODE 0 text7 dist/default/production\sensor_LDR.X.production.o
+__Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\sensor_LDR.X.production.o
+_intToStr 9F4 0 CODE 0 text2 dist/default/production\sensor_LDR.X.production.o
+__Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\sensor_LDR.X.production.o
+__end_of_I2C_Init 1018 0 CODE 0 text18 dist/default/production\sensor_LDR.X.production.o
+__end_of_I2C_Stop FEC 0 CODE 0 text15 dist/default/production\sensor_LDR.X.production.o
+__end_of_I2C_Wait F5E 0 CODE 0 text17 dist/default/production\sensor_LDR.X.production.o
+_ADC_Init 1018 0 CODE 0 text20 dist/default/production\sensor_LDR.X.production.o
+_ADC_Read F00 0 CODE 0 text19 dist/default/production\sensor_LDR.X.production.o
+OLED_Command@cmd 3 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Hintcodelo 18 0 CODE 0 intcodelo dist/default/production\sensor_LDR.X.production.o
+_OLED_Clear EC6 0 CODE 0 text10 dist/default/production\sensor_LDR.X.production.o
+___lwmod@divisor 3 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__end_of___lldiv C02 0 CODE 0 text8 dist/default/production\sensor_LDR.X.production.o
+__end_of___lwdiv D9A 0 CODE 0 text4 dist/default/production\sensor_LDR.X.production.o
+__end_of___lwmod E68 0 CODE 0 text3 dist/default/production\sensor_LDR.X.production.o
+OLED_Data@data 3 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__end_of_intToStr AAA 0 CODE 0 text2 dist/default/production\sensor_LDR.X.production.o
+intToStr@num 8 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+intToStr@str A 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+intToStr@i 12 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+intToStr@j 11 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__end_of_ADC_Init 1028 0 CODE 0 text20 dist/default/production\sensor_LDR.X.production.o
+__end_of_ADC_Read F38 0 CODE 0 text19 dist/default/production\sensor_LDR.X.production.o
+__end_of_font_0 856 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_1 851 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_2 84C 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_3 847 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_4 842 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_5 83D 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_6 838 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_7 833 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_8 82E 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_9 829 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_A 824 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_C 81F 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_D 81A 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_L 815 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_R 810 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_U 80B 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__end_of_font_Z 806 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+___lwdiv@quotient 5 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+___lwmod@dividend 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+___lldiv@counter 19 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lintcodelo 18 0 CODE 0 intcodelo dist/default/production\sensor_LDR.X.production.o
+ADC_Read@channel 5 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+start_initialization 1028 0 CODE 0 cinit dist/default/production\sensor_LDR.X.production.o
+__HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\sensor_LDR.X.production.o
+___lldiv@dividend D 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+___rparam_used 1 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_SSPADD FC8 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_SSPBUF FC9 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+OLED_String@str 8 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+_OLED_String E68 0 CODE 0 text5 dist/default/production\sensor_LDR.X.production.o
+__end_of_OLED_Clear F00 0 CODE 0 text10 dist/default/production\sensor_LDR.X.production.o
+isa$xinst 0 0 ABS 0 - C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+__Hbank0 0 0 ABS 0 bank0 dist/default/production\sensor_LDR.X.production.o
+__Hbank1 0 0 ABS 0 bank1 dist/default/production\sensor_LDR.X.production.o
+__Hbank2 0 0 ABS 0 bank2 dist/default/production\sensor_LDR.X.production.o
+__Hbank3 0 0 ABS 0 bank3 dist/default/production\sensor_LDR.X.production.o
+__Hbank4 0 0 ABS 0 bank4 dist/default/production\sensor_LDR.X.production.o
+__Hbank5 0 0 ABS 0 bank5 dist/default/production\sensor_LDR.X.production.o
+__Hbank6 0 0 ABS 0 bank6 dist/default/production\sensor_LDR.X.production.o
+__Hbank7 0 0 ABS 0 bank7 dist/default/production\sensor_LDR.X.production.o
+__Hcinit 0 0 ABS 0 cinit dist/default/production\sensor_LDR.X.production.o
+__Hconst 0 0 CONST 0 const dist/default/production\sensor_LDR.X.production.o
+__Hidata 0 0 CODE 0 idata dist/default/production\sensor_LDR.X.production.o
+__Hidloc 0 0 ABS 0 idloc dist/default/production\sensor_LDR.X.production.o
+__Hnvbit 0 0 COMRAM 1 nvbit dist/default/production\sensor_LDR.X.production.o
+__Hparam 0 0 COMRAM 1 rparam dist/default/production\sensor_LDR.X.production.o
+__Hrdata 0 0 COMRAM 1 rdata dist/default/production\sensor_LDR.X.production.o
+__Hstack 0 0 STACK 2 stack dist/default/production\sensor_LDR.X.production.o
+__Htext0 0 0 ABS 0 text0 dist/default/production\sensor_LDR.X.production.o
+__Htext1 0 0 ABS 0 text1 dist/default/production\sensor_LDR.X.production.o
+__Htext2 0 0 ABS 0 text2 dist/default/production\sensor_LDR.X.production.o
+__Htext3 0 0 ABS 0 text3 dist/default/production\sensor_LDR.X.production.o
+__Htext4 0 0 ABS 0 text4 dist/default/production\sensor_LDR.X.production.o
+__Htext5 0 0 ABS 0 text5 dist/default/production\sensor_LDR.X.production.o
+__Htext6 0 0 ABS 0 text6 dist/default/production\sensor_LDR.X.production.o
+__Htext7 0 0 ABS 0 text7 dist/default/production\sensor_LDR.X.production.o
+__Htext8 0 0 ABS 0 text8 dist/default/production\sensor_LDR.X.production.o
+__Htext9 0 0 ABS 0 text9 dist/default/production\sensor_LDR.X.production.o
+___lwdiv@counter 7 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\sensor_LDR.X.production.o
+__Hbigram 0 0 ABS 0 bigram dist/default/production\sensor_LDR.X.production.o
+__Hbigsfr 0 0 ABS 0 bigsfr dist/default/production\sensor_LDR.X.production.o
+__smallconst 800 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__Hcomram 0 0 ABS 0 comram dist/default/production\sensor_LDR.X.production.o
+__Hconfig 30000E 0 CONFIG 4 config dist/default/production\sensor_LDR.X.production.o
+__Lbank0 0 0 ABS 0 bank0 dist/default/production\sensor_LDR.X.production.o
+__Lbank1 0 0 ABS 0 bank1 dist/default/production\sensor_LDR.X.production.o
+__Lbank2 0 0 ABS 0 bank2 dist/default/production\sensor_LDR.X.production.o
+__Lbank3 0 0 ABS 0 bank3 dist/default/production\sensor_LDR.X.production.o
+__Lbank4 0 0 ABS 0 bank4 dist/default/production\sensor_LDR.X.production.o
+__Lbank5 0 0 ABS 0 bank5 dist/default/production\sensor_LDR.X.production.o
+__Lbank6 0 0 ABS 0 bank6 dist/default/production\sensor_LDR.X.production.o
+__Lbank7 0 0 ABS 0 bank7 dist/default/production\sensor_LDR.X.production.o
+__Lcinit 0 0 ABS 0 cinit dist/default/production\sensor_LDR.X.production.o
+__Lconst 0 0 CONST 0 const dist/default/production\sensor_LDR.X.production.o
+__Lidata 0 0 CODE 0 idata dist/default/production\sensor_LDR.X.production.o
+__Lidloc 0 0 ABS 0 idloc dist/default/production\sensor_LDR.X.production.o
+__end_of_showValue C98 0 CODE 0 text1 dist/default/production\sensor_LDR.X.production.o
+__Lnvbit 0 0 COMRAM 1 nvbit dist/default/production\sensor_LDR.X.production.o
+__Lparam 0 0 COMRAM 1 rparam dist/default/production\sensor_LDR.X.production.o
+__Lrdata 0 0 COMRAM 1 rdata dist/default/production\sensor_LDR.X.production.o
+__Lstack 0 0 STACK 2 stack dist/default/production\sensor_LDR.X.production.o
+__Ltext0 0 0 ABS 0 text0 dist/default/production\sensor_LDR.X.production.o
+__Ltext1 0 0 ABS 0 text1 dist/default/production\sensor_LDR.X.production.o
+__Ltext2 0 0 ABS 0 text2 dist/default/production\sensor_LDR.X.production.o
+__Ltext3 0 0 ABS 0 text3 dist/default/production\sensor_LDR.X.production.o
+__Ltext4 0 0 ABS 0 text4 dist/default/production\sensor_LDR.X.production.o
+__Ltext5 0 0 ABS 0 text5 dist/default/production\sensor_LDR.X.production.o
+__Ltext6 0 0 ABS 0 text6 dist/default/production\sensor_LDR.X.production.o
+__Ltext7 0 0 ABS 0 text7 dist/default/production\sensor_LDR.X.production.o
+__Ltext8 0 0 ABS 0 text8 dist/default/production\sensor_LDR.X.production.o
+__Ltext9 0 0 ABS 0 text9 dist/default/production\sensor_LDR.X.production.o
+__Hfarbss 0 0 FARRAM 0 farbss dist/default/production\sensor_LDR.X.production.o
+__Lintcode_body 0 0 ABS 0 intcode_body dist/default/production\sensor_LDR.X.production.o
+OLED_Clear@col 6 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Habs1 0 0 ABS 0 abs1 dist/default/production\sensor_LDR.X.production.o
+__Hdata 0 0 ABS 0 data dist/default/production\sensor_LDR.X.production.o
+__Hheap 0 0 HEAP 7 heap dist/default/production\sensor_LDR.X.production.o
+__Hinit 8000 0 CODE 0 init dist/default/production\sensor_LDR.X.production.o
+__Hrbit 0 0 COMRAM 1 rbit dist/default/production\sensor_LDR.X.production.o
+__Hrbss 0 0 COMRAM 1 rbss dist/default/production\sensor_LDR.X.production.o
+__Htemp 0 0 COMRAM 1 temp dist/default/production\sensor_LDR.X.production.o
+__Htext 0 0 ABS 0 text dist/default/production\sensor_LDR.X.production.o
+__Labs1 0 0 ABS 0 abs1 dist/default/production\sensor_LDR.X.production.o
+__Ldata 0 0 ABS 0 data dist/default/production\sensor_LDR.X.production.o
+__Lheap 0 0 HEAP 7 heap dist/default/production\sensor_LDR.X.production.o
+__Linit 7FFC 0 CODE 0 init dist/default/production\sensor_LDR.X.production.o
+__Lrbit 0 0 COMRAM 1 rbit dist/default/production\sensor_LDR.X.production.o
+__Lrbss 0 0 COMRAM 1 rbss dist/default/production\sensor_LDR.X.production.o
+__Ltemp 0 0 COMRAM 1 temp dist/default/production\sensor_LDR.X.production.o
+__Ltext 0 0 ABS 0 text dist/default/production\sensor_LDR.X.production.o
+_OLED_Command F7E 0 CODE 0 text12 dist/default/production\sensor_LDR.X.production.o
+___lmul D9A 0 CODE 0 text7 dist/default/production\sensor_LDR.X.production.o
+__HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Hintret 0 0 ABS 0 intret dist/default/production\sensor_LDR.X.production.o
+__Hirdata 0 0 CODE 0 irdata dist/default/production\sensor_LDR.X.production.o
+__S0 8000 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__S1 21 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__S4 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__S5 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_showValue C02 0 CODE 0 text1 dist/default/production\sensor_LDR.X.production.o
+?_ADC_Read 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\sensor_LDR.X.production.o
+__Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\sensor_LDR.X.production.o
+_font_0 851 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_1 84C 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_2 847 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_3 842 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_4 83D 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_5 838 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_6 833 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_7 82E 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_8 829 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_9 824 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_A 81F 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_C 81A 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_D 815 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_L 810 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_R 80B 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_U 806 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_Z 801 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__Lintentry 0 0 ABS 0 intentry dist/default/production\sensor_LDR.X.production.o
+___lldiv@divisor 11 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Hramtop 800 0 RAM 0 ramtop dist/default/production\sensor_LDR.X.production.o
+__Hrparam 0 0 COMRAM 1 rparam dist/default/production\sensor_LDR.X.production.o
+__activetblptr 2 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Hstruct 0 0 COMRAM 1 struct dist/default/production\sensor_LDR.X.production.o
+__Htext10 0 0 ABS 0 text10 dist/default/production\sensor_LDR.X.production.o
+__Htext11 0 0 ABS 0 text11 dist/default/production\sensor_LDR.X.production.o
+__Htext12 0 0 ABS 0 text12 dist/default/production\sensor_LDR.X.production.o
+__Htext13 0 0 ABS 0 text13 dist/default/production\sensor_LDR.X.production.o
+__Htext14 0 0 ABS 0 text14 dist/default/production\sensor_LDR.X.production.o
+__Htext15 0 0 ABS 0 text15 dist/default/production\sensor_LDR.X.production.o
+__Htext16 0 0 ABS 0 text16 dist/default/production\sensor_LDR.X.production.o
+__Htext17 0 0 ABS 0 text17 dist/default/production\sensor_LDR.X.production.o
+__Htext18 0 0 ABS 0 text18 dist/default/production\sensor_LDR.X.production.o
+__Htext19 0 0 ABS 0 text19 dist/default/production\sensor_LDR.X.production.o
+__Htext20 0 0 ABS 0 text20 dist/default/production\sensor_LDR.X.production.o
+__ptext10 EC6 0 CODE 0 text10 dist/default/production\sensor_LDR.X.production.o
+__ptext11 F5E 0 CODE 0 text11 dist/default/production\sensor_LDR.X.production.o
+__ptext12 F7E 0 CODE 0 text12 dist/default/production\sensor_LDR.X.production.o
+__ptext13 F9C 0 CODE 0 text13 dist/default/production\sensor_LDR.X.production.o
+__ptext14 FBA 0 CODE 0 text14 dist/default/production\sensor_LDR.X.production.o
+__ptext15 FD6 0 CODE 0 text15 dist/default/production\sensor_LDR.X.production.o
+__ptext16 FEC 0 CODE 0 text16 dist/default/production\sensor_LDR.X.production.o
+__ptext17 F38 0 CODE 0 text17 dist/default/production\sensor_LDR.X.production.o
+__ptext18 1002 0 CODE 0 text18 dist/default/production\sensor_LDR.X.production.o
+__ptext19 F00 0 CODE 0 text19 dist/default/production\sensor_LDR.X.production.o
+__ptext20 1018 0 CODE 0 text20 dist/default/production\sensor_LDR.X.production.o
+___lldiv B5E 0 CODE 0 text8 dist/default/production\sensor_LDR.X.production.o
+___lwdiv D28 0 CODE 0 text4 dist/default/production\sensor_LDR.X.production.o
+___lwmod E04 0 CODE 0 text3 dist/default/production\sensor_LDR.X.production.o
+__Lbigbss 0 0 BIGRAM 1 bigbss dist/default/production\sensor_LDR.X.production.o
+__Lbigram 0 0 ABS 0 bigram dist/default/production\sensor_LDR.X.production.o
+__Lbigsfr 0 0 ABS 0 bigsfr dist/default/production\sensor_LDR.X.production.o
+___lmul@multiplier 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__end_of_OLED_Command F9C 0 CODE 0 text12 dist/default/production\sensor_LDR.X.production.o
+OLED_Char@c 5 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+OLED_Char@i 6 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lcomram 0 0 ABS 0 comram dist/default/production\sensor_LDR.X.production.o
+__Lconfig 0 0 CONFIG 4 config dist/default/production\sensor_LDR.X.production.o
+__Lsivt_hi 0 0 CODE 0 sivt_hi dist/default/production\sensor_LDR.X.production.o
+__Lsivt_lo 18 0 CODE 0 sivt_lo dist/default/production\sensor_LDR.X.production.o
+__Lfarbss 0 0 FARRAM 0 farbss dist/default/production\sensor_LDR.X.production.o
+_OLED_SetCursor F5E 0 CODE 0 text11 dist/default/production\sensor_LDR.X.production.o
+___inthi_stack_hi 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+___inthi_stack_lo 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+___lwdiv@divisor 3 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lfardata 0 0 FARRAM 0 fardata dist/default/production\sensor_LDR.X.production.o
+isa$std 1 0 ABS 0 - C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+stackhi 0 0 ABS 0 - C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+stacklo 0 0 ABS 0 - C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+__Lintcode 8 0 CODE 0 intcode dist/default/production\sensor_LDR.X.production.o
+__Lintret 0 0 ABS 0 intret dist/default/production\sensor_LDR.X.production.o
+__Lirdata 0 0 CODE 0 irdata dist/default/production\sensor_LDR.X.production.o
+_ADCON0bits FC2 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+OLED_SetCursor@col 4 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lspace_0 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Lspace_1 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Lspace_2 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Lspace_4 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+showValue@percent 15 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+I2C_Write@data 2 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+_PIR1bits F9E 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+OLED_Char@ptr 7 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+end_of_initialization 1028 0 CODE 0 cinit dist/default/production\sensor_LDR.X.production.o
+__Lnvrram 0 0 COMRAM 1 nvrram dist/default/production\sensor_LDR.X.production.o
+__Hintentry 0 0 ABS 0 intentry dist/default/production\sensor_LDR.X.production.o
+___lwdiv@dividend 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+?___lldiv D 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+?___lwdiv 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+?___lwmod 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\sensor_LDR.X.production.o
+__Lramtop 800 0 RAM 0 ramtop dist/default/production\sensor_LDR.X.production.o
+OLED_SetCursor@page 5 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lrparam 0 0 COMRAM 1 rparam dist/default/production\sensor_LDR.X.production.o
+__pcinit 1028 0 CODE 0 cinit dist/default/production\sensor_LDR.X.production.o
+__end_of_OLED_String EC6 0 CODE 0 text5 dist/default/production\sensor_LDR.X.production.o
+_SSPCON2bits FC5 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__end_of_OLED_SetCursor F7E 0 CODE 0 text11 dist/default/production\sensor_LDR.X.production.o
+__ptext0 C98 0 CODE 0 text0 dist/default/production\sensor_LDR.X.production.o
+__ptext1 C02 0 CODE 0 text1 dist/default/production\sensor_LDR.X.production.o
+__ptext2 9F4 0 CODE 0 text2 dist/default/production\sensor_LDR.X.production.o
+__ptext3 E04 0 CODE 0 text3 dist/default/production\sensor_LDR.X.production.o
+__ptext4 D28 0 CODE 0 text4 dist/default/production\sensor_LDR.X.production.o
+__ptext5 E68 0 CODE 0 text5 dist/default/production\sensor_LDR.X.production.o
+__ptext6 876 0 CODE 0 text6 dist/default/production\sensor_LDR.X.production.o
+__ptext7 D9A 0 CODE 0 text7 dist/default/production\sensor_LDR.X.production.o
+__ptext8 B5E 0 CODE 0 text8 dist/default/production\sensor_LDR.X.production.o
+__ptext9 AAA 0 CODE 0 text9 dist/default/production\sensor_LDR.X.production.o
+__Lstruct 0 0 COMRAM 1 struct dist/default/production\sensor_LDR.X.production.o
+__Ltext10 0 0 ABS 0 text10 dist/default/production\sensor_LDR.X.production.o
+__Ltext11 0 0 ABS 0 text11 dist/default/production\sensor_LDR.X.production.o
+__Ltext12 0 0 ABS 0 text12 dist/default/production\sensor_LDR.X.production.o
+__Ltext13 0 0 ABS 0 text13 dist/default/production\sensor_LDR.X.production.o
+__Ltext14 0 0 ABS 0 text14 dist/default/production\sensor_LDR.X.production.o
+__Ltext15 0 0 ABS 0 text15 dist/default/production\sensor_LDR.X.production.o
+__Ltext16 0 0 ABS 0 text16 dist/default/production\sensor_LDR.X.production.o
+__Ltext17 0 0 ABS 0 text17 dist/default/production\sensor_LDR.X.production.o
+__Ltext18 0 0 ABS 0 text18 dist/default/production\sensor_LDR.X.production.o
+__Ltext19 0 0 ABS 0 text19 dist/default/production\sensor_LDR.X.production.o
+__Ltext20 0 0 ABS 0 text20 dist/default/production\sensor_LDR.X.production.o
+__ramtop 800 0 RAM 0 ramtop C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+__Lpowerup 0 0 CODE 0 powerup dist/default/production\sensor_LDR.X.production.o
+__Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\sensor_LDR.X.production.o
+__H__absolute__ 0 0 ABS 0 __absolute__ dist/default/production\sensor_LDR.X.production.o
+__psmallconst 800 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+intToStr@temp B 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Lreset_vec 0 0 CODE 0 reset_vec dist/default/production\sensor_LDR.X.production.o
+_font_colon 856 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+_font_space 860 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+___heap_hi 0 0 ABS 0 - C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+___heap_lo 0 0 ABS 0 - C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+___param_bank 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+___intlo_stack_hi 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+___intlo_stack_lo 0 0 STACK 2 stack C:\Users\JOHAN\AppData\Local\Temp\xcAscko.0\driver_tmp_9.o
+__Hbigdata 0 0 BIGRAM 1 bigdata dist/default/production\sensor_LDR.X.production.o
+__end_of__initialization 1028 0 CODE 0 cinit dist/default/production\sensor_LDR.X.production.o
+main@adcValue 1F 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__Libigdata 0 0 CODE 0 ibigdata dist/default/production\sensor_LDR.X.production.o
+__Lclrtext 0 0 ABS 0 clrtext dist/default/production\sensor_LDR.X.production.o
+___lmul@product 9 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+___lmul@multiplicand 5 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+___lldiv@quotient 15 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+__pcstackCOMRAM 1 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+showValue@adc 13 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+showValue@buf 16 0 COMRAM 1 cstackCOMRAM dist/default/production\sensor_LDR.X.production.o
+_SSPCON1 FC6 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_SSPCON2 FC5 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_SSPSTAT FC7 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__end_of_main D28 0 CODE 0 text0 dist/default/production\sensor_LDR.X.production.o
+_TRISA F92 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+_TRISC F94 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__HRAM 0 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Hbss 0 0 RAM 1 bss dist/default/production\sensor_LDR.X.production.o
+__Hram 0 0 ABS 0 ram dist/default/production\sensor_LDR.X.production.o
+__Hsfr 0 0 ABS 0 sfr dist/default/production\sensor_LDR.X.production.o
+__LRAM 1 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__Lbss 0 0 RAM 1 bss dist/default/production\sensor_LDR.X.production.o
+__Lram 0 0 ABS 0 ram dist/default/production\sensor_LDR.X.production.o
+__Lsfr 0 0 ABS 0 sfr dist/default/production\sensor_LDR.X.production.o
+_SSPSTATbits FC7 0 ABS 0 - dist/default/production\sensor_LDR.X.production.o
+__end_of_font_colon 85B 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__Hsivt_hi 0 0 CODE 0 sivt_hi dist/default/production\sensor_LDR.X.production.o
+__Hsivt_lo 18 0 CODE 0 sivt_lo dist/default/production\sensor_LDR.X.production.o
+__initialization 1028 0 CODE 0 cinit dist/default/production\sensor_LDR.X.production.o
+__end_of_font_space 865 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__Hfardata 0 0 FARRAM 0 fardata dist/default/production\sensor_LDR.X.production.o
+__Hsmallconst 876 0 SMALLCONST 0 smallconst dist/default/production\sensor_LDR.X.production.o
+__Lifardata 0 0 CODE 0 ifardata dist/default/production\sensor_LDR.X.production.o
+__Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\sensor_LDR.X.production.o
+__Hintcode 8 0 CODE 0 intcode dist/default/production\sensor_LDR.X.production.o
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+text6 0 876 876 7BC 1
+cstackCOMRAM 1 1 1 20 1
+init 0 7FFC 7FFC 4 1
+reset_vec 0 0 0 4 1
+smallconst 0 800 800 76 1
+# %NOTES Section
+# This section contains data of all the note-psects.  The beginning of the section
+# is indicated by %NOTES. The first line indicates the name and decimal
+# byte-length of the first note-psect, e.g.
+#   $codecov_info_hdr 16
+# Each line that follows contains the byte-data of the psect in hexadecimal as a
+# space-separated list. These lines are limited to 16 bytes of data.
+%NOTES
