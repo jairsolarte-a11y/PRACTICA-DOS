@@ -5929,7 +5929,7 @@ void ADC_Init(unsigned char p_ang);
 unsigned int ADC_Read(unsigned char ch);
 # 19 "OLED_Dat.c" 2
 # 1 "./i2c.h" 1
-# 22 "./i2c.h"
+# 16 "./i2c.h"
 void I2C_Init_Master(unsigned char sp_i2c);
 void I2C_Start(void);
 void I2C_Stop(void);
@@ -6532,7 +6532,7 @@ double y1(double);
 double yn(int, double);
 # 10 "./ssd1306_oled.h" 2
 # 1 "./i2c.h" 1
-# 22 "./i2c.h"
+# 16 "./i2c.h"
 void I2C_Init_Master(unsigned char sp_i2c);
 void I2C_Start(void);
 void I2C_Stop(void);
