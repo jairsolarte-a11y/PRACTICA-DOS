@@ -12,12 +12,6 @@
 # 1 "./i2c.h" 1
 
 
-
-
-
-
-
-
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -5917,8 +5911,8 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 2 3
-# 10 "./i2c.h" 2
-# 22 "./i2c.h"
+# 4 "./i2c.h" 2
+# 16 "./i2c.h"
 void I2C_Init_Master(unsigned char sp_i2c);
 void I2C_Start(void);
 void I2C_Stop(void);

@@ -1,10 +1,4 @@
-/* #include "i2c.h"
-*
-* Creada por: Ing. Abiezer Hernandez O.
-* Fecha de creacion: 25/11/2019
-* Electronica y Circuitos
-*
-*/
+
 
 #include <xc.h>
 #define _XTAL_FREQ 8000000
