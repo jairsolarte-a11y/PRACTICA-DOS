@@ -18,7 +18,7 @@ void I2C_Master_Init(uint32_t clock_hz)
     TRISBbits.TRISB1 = 1;   // SCL como entrada para el modulo MSSP
 
     SSPSTAT = 0x80;         // Slew rate deshabilitado para 100 kHz
-    SSPCON1 = 0b00101000;         // MSSP habilitado, modo I2C Master  0x28
+    SSPCON1 = 0b00101000;         // MSSP habilitado, modo I2C Master  
     SSPCON2 = 0x00;
 
     /*
