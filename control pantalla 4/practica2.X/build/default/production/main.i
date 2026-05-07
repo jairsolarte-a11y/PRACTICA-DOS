@@ -5941,39 +5941,65 @@ void SSD1306_SetCursor(uint8_t column, uint8_t page);
 void SSD1306_WriteChar(char c);
 void SSD1306_WriteString(const char *str);
 # 5 "main.c" 2
-# 14 "main.c"
+# 21 "main.c"
 static void System_Init(void);
-static uint8_t Process_Components(uint16_t adc_value);
-static void Display_Update(uint16_t adc_value, uint8_t led_state);
+static void Startup_LED_Test(void);
+
+static uint16_t Read_LM35_Temperature_X10(void);
+static void Process_Components(uint16_t temperature_x10);
+static void Display_Update(uint16_t adc_value, uint16_t temperature_x10);
+
 static void UInt16_To_String(uint16_t value, char *buffer);
+static void Temperature_To_String(uint16_t temperature_x10, char *buffer);
 
 void main(void)
 {
     uint16_t adc_value;
-    uint8_t led_state;
+    uint16_t temperature_x10;
 
     System_Init();
+
+    Startup_LED_Test();
 
     SSD1306_ClearDisplay();
 
     SSD1306_SetCursor(0, 0);
-    SSD1306_WriteString("PRACTICA ADC");
+    SSD1306_WriteString("SENSOR LM35");
 
     SSD1306_SetCursor(0, 1);
     SSD1306_WriteString("PIC18F4550");
 
     SSD1306_SetCursor(0, 6);
-    SSD1306_WriteString("LED ON: 600-1023");
+    SSD1306_WriteString("Temp real en C");
 
     while (1)
     {
+
+
+
+
         adc_value = ADC_Read(0);
 
-        led_state = Process_Components(adc_value);
 
-        Display_Update(adc_value, led_state);
 
-        _delay((unsigned long)((200)*(8000000UL/4000.0)));
+
+
+        temperature_x10 = Read_LM35_Temperature_X10();
+
+
+
+
+
+
+        Process_Components(temperature_x10);
+
+
+
+
+
+        Display_Update(adc_value, temperature_x10);
+
+        _delay((unsigned long)((500)*(8000000UL/4000.0)));
     }
 }
 
@@ -6005,7 +6031,7 @@ static void System_Init(void)
 
 
     ADC_Init();
-# 86 "main.c"
+# 121 "main.c"
     I2C_Master_Init(100000UL);
 
 
@@ -6015,29 +6041,56 @@ static void System_Init(void)
     SSD1306_Init();
 }
 
-static uint8_t Process_Components(uint16_t adc_value)
+static void Startup_LED_Test(void)
 {
-    uint8_t led_state;
-# 108 "main.c"
-    if ((adc_value >= 600u) && (adc_value <= 1023u))
+    uint8_t i;
+
+    for (i = 0; i < 3; i++)
     {
         LATDbits.LATD0 = 1;
-        led_state = 1;
+        _delay((unsigned long)((150)*(8000000UL/4000.0)));
+
+        LATDbits.LATD0 = 0;
+        _delay((unsigned long)((150)*(8000000UL/4000.0)));
+    }
+}
+
+static uint16_t Read_LM35_Temperature_X10(void)
+{
+    uint16_t adc_value;
+    uint32_t temperature_x10;
+
+
+
+
+
+    adc_value = ADC_Read(0);
+# 177 "main.c"
+    temperature_x10 = ((uint32_t)adc_value * 5000UL) / 1023UL;
+
+    return (uint16_t)temperature_x10;
+}
+
+static void Process_Components(uint16_t temperature_x10)
+{
+# 192 "main.c"
+    if (temperature_x10 >= 300u)
+    {
+        LATDbits.LATD0 = 1;
     }
     else
     {
         LATDbits.LATD0 = 0;
-        led_state = 0;
     }
-
-    return led_state;
 }
 
-static void Display_Update(uint16_t adc_value, uint8_t led_state)
+static void Display_Update(uint16_t adc_value, uint16_t temperature_x10)
 {
     char adc_text[6];
+    char temp_text[8];
 
     UInt16_To_String(adc_value, adc_text);
+    Temperature_To_String(temperature_x10, temp_text);
 
     SSD1306_ClearLine(3);
     SSD1306_SetCursor(0, 3);
@@ -6046,8 +6099,14 @@ static void Display_Update(uint16_t adc_value, uint8_t led_state)
 
     SSD1306_ClearLine(4);
     SSD1306_SetCursor(0, 4);
+    SSD1306_WriteString("TEMP: ");
+    SSD1306_WriteString(temp_text);
+    SSD1306_WriteString(" C");
 
-    if (led_state)
+    SSD1306_ClearLine(5);
+    SSD1306_SetCursor(0, 5);
+
+    if (temperature_x10 >= 300u)
     {
         SSD1306_WriteString("LED: ON ");
     }
@@ -6059,7 +6118,6 @@ static void Display_Update(uint16_t adc_value, uint8_t led_state)
 
 static void UInt16_To_String(uint16_t value, char *buffer)
 {
-# 157 "main.c"
     uint8_t i = 0;
     uint8_t j = 0;
     char temp[6];
@@ -6086,4 +6144,31 @@ static void UInt16_To_String(uint16_t value, char *buffer)
     }
 
     buffer[j] = '\0';
+}
+
+static void Temperature_To_String(uint16_t temperature_x10, char *buffer)
+{
+    uint16_t integer_part;
+    uint16_t decimal_part;
+    char integer_text[6];
+    uint8_t i = 0;
+
+    integer_part = temperature_x10 / 10;
+    decimal_part = temperature_x10 % 10;
+
+    UInt16_To_String(integer_part, integer_text);
+
+    while (integer_text[i] != '\0')
+    {
+        buffer[i] = integer_text[i];
+        i++;
+    }
+
+    buffer[i] = '.';
+    i++;
+
+    buffer[i] = (char)(decimal_part + '0');
+    i++;
+
+    buffer[i] = '\0';
 }
