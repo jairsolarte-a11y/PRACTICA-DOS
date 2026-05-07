@@ -9,6 +9,7 @@
       <itemPath>system.h</itemPath>
       <itemPath>adc.h</itemPath>
       <itemPath>mq135.h</itemPath>
+      <itemPath>light_sensor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -28,6 +29,7 @@
       <itemPath>ssd1306.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>mq135.c</itemPath>
+      <itemPath>light_sensor.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
