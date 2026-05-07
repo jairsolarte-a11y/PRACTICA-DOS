@@ -5920,14 +5920,13 @@ unsigned char __t3rd16on(void);
 void ADC_Init(void);
 uint16_t ADC_Read(uint8_t channel);
 # 2 "adc.c" 2
-
-
-
-
-
-
+# 13 "adc.c"
 void ADC_Init(void)
 {
+
+
+
+
     TRISAbits.TRISA0 = 1;
 
 
@@ -5937,9 +5936,9 @@ void ADC_Init(void)
 
 
     ADCON0 = 0x01;
-# 29 "adc.c"
+# 37 "adc.c"
     ADCON1 = 0x0E;
-# 38 "adc.c"
+# 46 "adc.c"
     ADCON2 = 0xAA;
 }
 
@@ -5950,14 +5949,34 @@ uint16_t ADC_Read(uint8_t channel)
         channel = 0;
     }
 
+
+
+
+
     ADCON0 &= 0xC3;
     ADCON0 |= (uint8_t)(channel << 2);
 
-    _delay((unsigned long)((25)*(8000000UL/4000000.0)));
+
+
+
+
+    _delay((unsigned long)((30)*(8000000UL/4000000.0)));
+
+
+
+
 
     ADCON0bits.GO_DONE = 1;
 
+
+
+
+
     while (ADCON0bits.GO_DONE);
+
+
+
+
 
     return (((uint16_t)ADRESH << 8) | ADRESL);
 }
