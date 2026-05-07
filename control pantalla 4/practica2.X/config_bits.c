@@ -3,8 +3,8 @@
 /*
    PIC18F4550
    MPLAB X IDE v6.30
-   Compilador XC8
-   Oscilador interno a 8 MHz
+   XC8
+   Oscilador interno 8 MHz
 */
 
 #pragma config PLLDIV = 1

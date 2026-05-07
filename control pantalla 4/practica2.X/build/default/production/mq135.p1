@@ -1,77 +1,4 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"3436 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3436:     struct {
-[s S142 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S142 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 ]
-"3445
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3445:     struct {
-[s S143 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S143 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 ]
-"3435
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3435: typedef union {
-[u S141 `S142 1 `S143 1 ]
-[n S141 . . . ]
-"3455
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3455: extern volatile TRISAbits_t TRISAbits __attribute__((address(0xF92)));
-[v _TRISAbits `VS141 ~T0 @X0 0 e@3986 ]
-"6664
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6664: extern volatile unsigned char ADCON0 __attribute__((address(0xFC2)));
-[v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
-"6579
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6579: extern volatile unsigned char ADCON1 __attribute__((address(0xFC1)));
-[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
-"6508
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6508: extern volatile unsigned char ADCON2 __attribute__((address(0xFC0)));
-[v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
-[v F205 `(v ~T0 @X0 1 tf1`ul ]
-"20 C:\Program Files\Microchip\xc8\v3.10\pic\include/builtins.h
-[v __delay `JF205 ~T0 @X0 0 e ]
-[p i __delay ]
-"6670 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6670:     struct {
-[s S273 :1 `uc 1 :1 `uc 1 ]
-[n S273 . . GO_NOT_DONE ]
-"6674
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6674:     struct {
-[s S274 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
-[n S274 . ADON GO_nDONE CHS ]
-"6679
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6679:     struct {
-[s S275 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S275 . . GO_DONE CHS0 CHS1 CHS2 CHS3 ]
-"6687
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6687:     struct {
-[s S276 :1 `uc 1 :1 `uc 1 ]
-[n S276 . . DONE ]
-"6691
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6691:     struct {
-[s S277 :1 `uc 1 :1 `uc 1 ]
-[n S277 . . GO ]
-"6695
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6695:     struct {
-[s S278 :1 `uc 1 :1 `uc 1 ]
-[n S278 . . NOT_DONE ]
-"6699
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6699:     struct {
-[s S279 :1 `uc 1 :1 `uc 1 ]
-[n S279 . . nDONE ]
-"6703
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6703:     struct {
-[s S280 :1 `uc 1 :1 `uc 1 ]
-[n S280 . . GODONE ]
-"6669
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6669: typedef union {
-[u S272 `S273 1 `S274 1 `S275 1 `S276 1 `S277 1 `S278 1 `S279 1 `S280 1 ]
-[n S272 . . . . . . . . . ]
-"6708
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6708: extern volatile ADCON0bits_t ADCON0bits __attribute__((address(0xFC2)));
-[v _ADCON0bits `VS272 ~T0 @X0 0 e@4034 ]
-"6797
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6797: extern volatile unsigned char ADRESH __attribute__((address(0xFC4)));
-[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
-"6790
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6790: extern volatile unsigned char ADRESL __attribute__((address(0xFC3)));
-[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
 "52 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 52: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -582,83 +509,179 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8891
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8891: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"10 adc.c
-[; ;adc.c: 10: void ADC_Init(void)
-[v _ADC_Init `(v ~T0 @X0 1 ef ]
-"11
-[; ;adc.c: 11: {
+"13 mq135.c
+[; ;mq135.c: 13: uint8_t MQ135_Get_Level(uint16_t adc_value)
+[v _MQ135_Get_Level `(uc ~T0 @X0 1 ef1`us ]
+"14
+[; ;mq135.c: 14: {
 {
-[e :U _ADC_Init ]
-[f ]
-"12
-[; ;adc.c: 12:     TRISAbits.TRISA0 = 1;
-[e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
+[e :U _MQ135_Get_Level ]
 "13
-[; ;adc.c: 13:     TRISAbits.TRISA1 = 1;
-[e = . . _TRISAbits 0 1 -> -> 1 `i `uc ]
+[; ;mq135.c: 13: uint8_t MQ135_Get_Level(uint16_t adc_value)
+[v _adc_value `us ~T0 @X0 1 r1 ]
+"14
+[; ;mq135.c: 14: {
+[f ]
+"15
+[; ;mq135.c: 15:     if (adc_value <= 250u)
+[e $ ! <= -> _adc_value `ui -> 250 `ui 392  ]
+"16
+[; ;mq135.c: 16:     {
+{
+"17
+[; ;mq135.c: 17:         return 0u;
+[e ) -> -> 0 `ui `uc ]
+[e $UE 391  ]
+"18
+[; ;mq135.c: 18:     }
+}
+[e $U 393  ]
+"19
+[; ;mq135.c: 19:     else if (adc_value <= 400u)
+[e :U 392 ]
+[e $ ! <= -> _adc_value `ui -> 400 `ui 394  ]
+"20
+[; ;mq135.c: 20:     {
+{
 "21
-[; ;adc.c: 21:     ADCON0 = 0x01;
-[e = _ADCON0 -> -> 1 `i `uc ]
+[; ;mq135.c: 21:         return 1u;
+[e ) -> -> 1 `ui `uc ]
+[e $UE 391  ]
+"22
+[; ;mq135.c: 22:     }
+}
+[e $U 395  ]
+"23
+[; ;mq135.c: 23:     else if (adc_value <= 600u)
+[e :U 394 ]
+[e $ ! <= -> _adc_value `ui -> 600 `ui 396  ]
+"24
+[; ;mq135.c: 24:     {
+{
+"25
+[; ;mq135.c: 25:         return 2u;
+[e ) -> -> 2 `ui `uc ]
+[e $UE 391  ]
+"26
+[; ;mq135.c: 26:     }
+}
+[e $U 397  ]
+"27
+[; ;mq135.c: 27:     else if (adc_value <= 800u)
+[e :U 396 ]
+[e $ ! <= -> _adc_value `ui -> 800 `ui 398  ]
+"28
+[; ;mq135.c: 28:     {
+{
+"29
+[; ;mq135.c: 29:         return 3u;
+[e ) -> -> 3 `ui `uc ]
+[e $UE 391  ]
+"30
+[; ;mq135.c: 30:     }
+}
+[e $U 399  ]
+"31
+[; ;mq135.c: 31:     else
+[e :U 398 ]
 "32
-[; ;adc.c: 32:     ADCON1 = 0x0D;
-[e = _ADCON1 -> -> 13 `i `uc ]
-"41
-[; ;adc.c: 41:     ADCON2 = 0xAA;
-[e = _ADCON2 -> -> 170 `i `uc ]
-"42
-[; ;adc.c: 42: }
+[; ;mq135.c: 32:     {
+{
+"33
+[; ;mq135.c: 33:         return 4u;
+[e ) -> -> 4 `ui `uc ]
+[e $UE 391  ]
+"34
+[; ;mq135.c: 34:     }
+}
+[e :U 399 ]
+[e :U 397 ]
+[e :U 395 ]
+[e :U 393 ]
+"35
+[; ;mq135.c: 35: }
 [e :UE 391 ]
 }
-"44
-[; ;adc.c: 44: uint16_t ADC_Read(uint8_t channel)
-[v _ADC_Read `(us ~T0 @X0 1 ef1`uc ]
-"45
-[; ;adc.c: 45: {
+"37
+[; ;mq135.c: 37: const char* MQ135_Get_Text(uint8_t level)
+[v _MQ135_Get_Text `(*Cuc ~T0 @X0 1 ef1`uc ]
+"38
+[; ;mq135.c: 38: {
 {
-[e :U _ADC_Read ]
-"44
-[; ;adc.c: 44: uint16_t ADC_Read(uint8_t channel)
-[v _channel `uc ~T0 @X0 1 r1 ]
-"45
-[; ;adc.c: 45: {
+[e :U _MQ135_Get_Text ]
+"37
+[; ;mq135.c: 37: const char* MQ135_Get_Text(uint8_t level)
+[v _level `uc ~T0 @X0 1 r1 ]
+"38
+[; ;mq135.c: 38: {
 [f ]
-"46
-[; ;adc.c: 46:     if (channel > 13)
-[e $ ! > -> _channel `i -> 13 `i 393  ]
-"47
-[; ;adc.c: 47:     {
+"39
+[; ;mq135.c: 39:     switch (level)
+[e $U 402  ]
+"40
+[; ;mq135.c: 40:     {
 {
+"41
+[; ;mq135.c: 41:         case 0u:
+[e :U 403 ]
+"42
+[; ;mq135.c: 42:             return "AIRE LIMPIO";
+[e ) :s 1C ]
+[e $UE 400  ]
+"44
+[; ;mq135.c: 44:         case 1u:
+[e :U 404 ]
+"45
+[; ;mq135.c: 45:             return "AIRE ACEPTABLE";
+[e ) :s 2C ]
+[e $UE 400  ]
+"47
+[; ;mq135.c: 47:         case 2u:
+[e :U 405 ]
 "48
-[; ;adc.c: 48:         channel = 0;
-[e = _channel -> -> 0 `i `uc ]
-"49
-[; ;adc.c: 49:     }
-}
-[e :U 393 ]
+[; ;mq135.c: 48:             return "AIRE REGULAR";
+[e ) :s 3C ]
+[e $UE 400  ]
+"50
+[; ;mq135.c: 50:         case 3u:
+[e :U 406 ]
 "51
-[; ;adc.c: 51:     ADCON0 &= 0xC3;
-[e =& _ADCON0 -> -> 195 `i `Vuc ]
-"52
-[; ;adc.c: 52:     ADCON0 |= (uint8_t)(channel << 2);
-[e =| _ADCON0 -> -> << -> _channel `i -> 2 `i `uc `Vuc ]
+[; ;mq135.c: 51:             return "AIRE CONTAM.";
+[e ) :s 4C ]
+[e $UE 400  ]
+"53
+[; ;mq135.c: 53:         case 4u:
+[e :U 407 ]
 "54
-[; ;adc.c: 54:     _delay((unsigned long)((30)*(8000000UL/4000000.0)));
-[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 8000000 `ul `d .4000000.0 `ul ]
+[; ;mq135.c: 54:             return "AIRE MUY CONT.";
+[e ) :s 5C ]
+[e $UE 400  ]
 "56
-[; ;adc.c: 56:     ADCON0bits.GO_DONE = 1;
-[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;mq135.c: 56:         default:
+[e :U 408 ]
+"57
+[; ;mq135.c: 57:             return "AIRE ERROR";
+[e ) :s 6C ]
+[e $UE 400  ]
 "58
-[; ;adc.c: 58:     while (ADCON0bits.GO_DONE);
-[e $U 394  ]
-[e :U 395 ]
-[e :U 394 ]
-[e $ != -> . . _ADCON0bits 2 1 `i -> 0 `i 395  ]
-[e :U 396 ]
-"60
-[; ;adc.c: 60:     return (((uint16_t)ADRESH << 8) | ADRESL);
-[e ) -> | << -> -> _ADRESH `us `ui -> 8 `i -> _ADRESL `ui `us ]
-[e $UE 392  ]
-"61
-[; ;adc.c: 61: }
-[e :UE 392 ]
+[; ;mq135.c: 58:     }
 }
+[e $U 401  ]
+[e :U 402 ]
+[e [\ _level , $ -> -> 0 `ui `i 403
+ , $ -> -> 1 `ui `i 404
+ , $ -> -> 2 `ui `i 405
+ , $ -> -> 3 `ui `i 406
+ , $ -> -> 4 `ui `i 407
+ 408 ]
+[e :U 401 ]
+"59
+[; ;mq135.c: 59: }
+[e :UE 400 ]
+}
+[a 6C 65 73 82 69 32 69 82 82 79 82 0 ]
+[a 3C 65 73 82 69 32 82 69 71 85 76 65 82 0 ]
+[a 1C 65 73 82 69 32 76 73 77 80 73 79 0 ]
+[a 2C 65 73 82 69 32 65 67 69 80 84 65 66 76 69 0 ]
+[a 5C 65 73 82 69 32 77 85 89 32 67 79 78 84 46 0 ]
+[a 4C 65 73 82 69 32 67 79 78 84 65 77 46 0 ]

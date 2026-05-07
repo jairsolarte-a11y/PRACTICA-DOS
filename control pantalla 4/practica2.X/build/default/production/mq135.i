@@ -1,4 +1,4 @@
-# 1 "i2c_master.c"
+# 1 "mq135.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 295 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "i2c_master.c" 2
-# 1 "./i2c_master.h" 1
+# 1 "mq135.c" 2
+# 1 "./mq135.h" 1
 
 
 
@@ -5915,63 +5915,62 @@ unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 2 3
 # 5 "./system.h" 2
-# 5 "./i2c_master.h" 2
+# 5 "./mq135.h" 2
 
-void I2C_Master_Init(uint32_t clock_hz);
-void I2C_Master_Start(void);
-void I2C_Master_Stop(void);
-uint8_t I2C_Master_Write(uint8_t data);
-# 2 "i2c_master.c" 2
-# 13 "i2c_master.c"
-static void I2C_Master_Wait(void)
+
+
+
+
+
+
+uint8_t MQ135_Get_Level(uint16_t adc_value);
+const char* MQ135_Get_Text(uint8_t level);
+# 2 "mq135.c" 2
+# 13 "mq135.c"
+uint8_t MQ135_Get_Level(uint16_t adc_value)
 {
-    while ((SSPCON2 & 0x1F) || SSPSTATbits.R_nW);
+    if (adc_value <= 250u)
+    {
+        return 0u;
+    }
+    else if (adc_value <= 400u)
+    {
+        return 1u;
+    }
+    else if (adc_value <= 600u)
+    {
+        return 2u;
+    }
+    else if (adc_value <= 800u)
+    {
+        return 3u;
+    }
+    else
+    {
+        return 4u;
+    }
 }
 
-void I2C_Master_Init(uint32_t clock_hz)
+const char* MQ135_Get_Text(uint8_t level)
 {
-    (void)clock_hz;
+    switch (level)
+    {
+        case 0u:
+            return "AIRE LIMPIO";
 
-    TRISBbits.TRISB0 = 1;
-    TRISBbits.TRISB1 = 1;
+        case 1u:
+            return "AIRE ACEPTABLE";
 
-    SSPSTAT = 0x80;
-    SSPCON1 = 0b00101000;
-    SSPCON2 = 0x00;
+        case 2u:
+            return "AIRE REGULAR";
 
-    SSPADD = 119u;
+        case 3u:
+            return "AIRE CONTAM.";
 
-    PIR1bits.SSPIF = 0;
-}
+        case 4u:
+            return "AIRE MUY CONT.";
 
-void I2C_Master_Start(void)
-{
-    I2C_Master_Wait();
-
-    SSPCON2bits.SEN = 1;
-
-    while (SSPCON2bits.SEN);
-}
-
-void I2C_Master_Stop(void)
-{
-    I2C_Master_Wait();
-
-    SSPCON2bits.PEN = 1;
-
-    while (SSPCON2bits.PEN);
-}
-
-uint8_t I2C_Master_Write(uint8_t data)
-{
-    I2C_Master_Wait();
-
-    PIR1bits.SSPIF = 0;
-    SSPBUF = data;
-
-    while (!PIR1bits.SSPIF);
-
-    PIR1bits.SSPIF = 0;
-
-    return SSPCON2bits.ACKSTAT;
+        default:
+            return "AIRE ERROR";
+    }
 }
