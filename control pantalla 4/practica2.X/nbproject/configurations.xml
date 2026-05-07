@@ -8,6 +8,7 @@
       <itemPath>i2c_master.h</itemPath>
       <itemPath>system.h</itemPath>
       <itemPath>adc.h</itemPath>
+      <itemPath>mq135.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -26,6 +27,7 @@
       <itemPath>adc.c</itemPath>
       <itemPath>ssd1306.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>mq135.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

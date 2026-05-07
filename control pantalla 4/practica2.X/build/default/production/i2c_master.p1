@@ -624,150 +624,153 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8891
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8891: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"10 i2c_master.c
-[; ;i2c_master.c: 10: static void I2C_Master_Wait(void)
+"13 i2c_master.c
+[; ;i2c_master.c: 13: static void I2C_Master_Wait(void)
 [v _I2C_Master_Wait `(v ~T0 @X0 1 sf ]
-"11
-[; ;i2c_master.c: 11: {
+"14
+[; ;i2c_master.c: 14: {
 {
 [e :U _I2C_Master_Wait ]
 [f ]
-"12
-[; ;i2c_master.c: 12:     while ((SSPCON2 & 0x1F) || SSPSTATbits.R_nW);
+"15
+[; ;i2c_master.c: 15:     while ((SSPCON2 & 0x1F) || SSPSTATbits.R_nW);
 [e $U 392  ]
 [e :U 393 ]
 [e :U 392 ]
 [e $ || != & -> _SSPCON2 `i -> 31 `i -> 0 `i != -> . . _SSPSTATbits 2 2 `i -> 0 `i 393  ]
 [e :U 394 ]
-"13
-[; ;i2c_master.c: 13: }
+"16
+[; ;i2c_master.c: 16: }
 [e :UE 391 ]
 }
-"15
-[; ;i2c_master.c: 15: void I2C_Master_Init(uint32_t clock_hz)
+"18
+[; ;i2c_master.c: 18: void I2C_Master_Init(uint32_t clock_hz)
 [v _I2C_Master_Init `(v ~T0 @X0 1 ef1`ul ]
-"16
-[; ;i2c_master.c: 16: {
+"19
+[; ;i2c_master.c: 19: {
 {
 [e :U _I2C_Master_Init ]
-"15
-[; ;i2c_master.c: 15: void I2C_Master_Init(uint32_t clock_hz)
-[v _clock_hz `ul ~T0 @X0 1 r1 ]
-"16
-[; ;i2c_master.c: 16: {
-[f ]
-"17
-[; ;i2c_master.c: 17:     TRISBbits.TRISB0 = 1;
-[e = . . _TRISBbits 0 0 -> -> 1 `i `uc ]
 "18
-[; ;i2c_master.c: 18:     TRISBbits.TRISB1 = 1;
-[e = . . _TRISBbits 0 1 -> -> 1 `i `uc ]
+[; ;i2c_master.c: 18: void I2C_Master_Init(uint32_t clock_hz)
+[v _clock_hz `ul ~T0 @X0 1 r1 ]
+"19
+[; ;i2c_master.c: 19: {
+[f ]
 "20
-[; ;i2c_master.c: 20:     SSPSTAT = 0x80;
-[e = _SSPSTAT -> -> 128 `i `uc ]
-"21
-[; ;i2c_master.c: 21:     SSPCON1 = 0b00101000;
-[e = _SSPCON1 -> -> 40 `i `uc ]
+[; ;i2c_master.c: 20:     (void)clock_hz;
+[e _clock_hz ]
 "22
-[; ;i2c_master.c: 22:     SSPCON2 = 0x00;
+[; ;i2c_master.c: 22:     TRISBbits.TRISB0 = 1;
+[e = . . _TRISBbits 0 0 -> -> 1 `i `uc ]
+"23
+[; ;i2c_master.c: 23:     TRISBbits.TRISB1 = 1;
+[e = . . _TRISBbits 0 1 -> -> 1 `i `uc ]
+"25
+[; ;i2c_master.c: 25:     SSPSTAT = 0x80;
+[e = _SSPSTAT -> -> 128 `i `uc ]
+"26
+[; ;i2c_master.c: 26:     SSPCON1 = 0b00101000;
+[e = _SSPCON1 -> -> 40 `i `uc ]
+"27
+[; ;i2c_master.c: 27:     SSPCON2 = 0x00;
 [e = _SSPCON2 -> -> 0 `i `uc ]
-"32
-[; ;i2c_master.c: 32:     SSPADD = 119u;
+"29
+[; ;i2c_master.c: 29:     SSPADD = 119u;
 [e = _SSPADD -> -> 119 `ui `uc ]
-"34
-[; ;i2c_master.c: 34:     PIR1bits.SSPIF = 0;
+"31
+[; ;i2c_master.c: 31:     PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"35
-[; ;i2c_master.c: 35: }
+"32
+[; ;i2c_master.c: 32: }
 [e :UE 395 ]
 }
-"37
-[; ;i2c_master.c: 37: void I2C_Master_Start(void)
+"34
+[; ;i2c_master.c: 34: void I2C_Master_Start(void)
 [v _I2C_Master_Start `(v ~T0 @X0 1 ef ]
-"38
-[; ;i2c_master.c: 38: {
+"35
+[; ;i2c_master.c: 35: {
 {
 [e :U _I2C_Master_Start ]
 [f ]
-"39
-[; ;i2c_master.c: 39:     I2C_Master_Wait();
+"36
+[; ;i2c_master.c: 36:     I2C_Master_Wait();
 [e ( _I2C_Master_Wait ..  ]
-"40
-[; ;i2c_master.c: 40:     SSPCON2bits.SEN = 1;
+"38
+[; ;i2c_master.c: 38:     SSPCON2bits.SEN = 1;
 [e = . . _SSPCON2bits 0 0 -> -> 1 `i `uc ]
-"41
-[; ;i2c_master.c: 41:     while (SSPCON2bits.SEN);
+"40
+[; ;i2c_master.c: 40:     while (SSPCON2bits.SEN);
 [e $U 397  ]
 [e :U 398 ]
 [e :U 397 ]
 [e $ != -> . . _SSPCON2bits 0 0 `i -> 0 `i 398  ]
 [e :U 399 ]
-"42
-[; ;i2c_master.c: 42: }
+"41
+[; ;i2c_master.c: 41: }
 [e :UE 396 ]
 }
-"44
-[; ;i2c_master.c: 44: void I2C_Master_Stop(void)
+"43
+[; ;i2c_master.c: 43: void I2C_Master_Stop(void)
 [v _I2C_Master_Stop `(v ~T0 @X0 1 ef ]
-"45
-[; ;i2c_master.c: 45: {
+"44
+[; ;i2c_master.c: 44: {
 {
 [e :U _I2C_Master_Stop ]
 [f ]
-"46
-[; ;i2c_master.c: 46:     I2C_Master_Wait();
+"45
+[; ;i2c_master.c: 45:     I2C_Master_Wait();
 [e ( _I2C_Master_Wait ..  ]
 "47
 [; ;i2c_master.c: 47:     SSPCON2bits.PEN = 1;
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
-"48
-[; ;i2c_master.c: 48:     while (SSPCON2bits.PEN);
+"49
+[; ;i2c_master.c: 49:     while (SSPCON2bits.PEN);
 [e $U 401  ]
 [e :U 402 ]
 [e :U 401 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> 0 `i 402  ]
 [e :U 403 ]
-"49
-[; ;i2c_master.c: 49: }
+"50
+[; ;i2c_master.c: 50: }
 [e :UE 400 ]
 }
-"51
-[; ;i2c_master.c: 51: uint8_t I2C_Master_Write(uint8_t data)
-[v _I2C_Master_Write `(uc ~T0 @X0 1 ef1`uc ]
 "52
-[; ;i2c_master.c: 52: {
+[; ;i2c_master.c: 52: uint8_t I2C_Master_Write(uint8_t data)
+[v _I2C_Master_Write `(uc ~T0 @X0 1 ef1`uc ]
+"53
+[; ;i2c_master.c: 53: {
 {
 [e :U _I2C_Master_Write ]
-"51
-[; ;i2c_master.c: 51: uint8_t I2C_Master_Write(uint8_t data)
-[v _data `uc ~T0 @X0 1 r1 ]
 "52
-[; ;i2c_master.c: 52: {
-[f ]
+[; ;i2c_master.c: 52: uint8_t I2C_Master_Write(uint8_t data)
+[v _data `uc ~T0 @X0 1 r1 ]
 "53
-[; ;i2c_master.c: 53:     I2C_Master_Wait();
+[; ;i2c_master.c: 53: {
+[f ]
+"54
+[; ;i2c_master.c: 54:     I2C_Master_Wait();
 [e ( _I2C_Master_Wait ..  ]
-"55
-[; ;i2c_master.c: 55:     PIR1bits.SSPIF = 0;
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
 "56
-[; ;i2c_master.c: 56:     SSPBUF = data;
+[; ;i2c_master.c: 56:     PIR1bits.SSPIF = 0;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"57
+[; ;i2c_master.c: 57:     SSPBUF = data;
 [e = _SSPBUF _data ]
-"58
-[; ;i2c_master.c: 58:     while (!PIR1bits.SSPIF);
+"59
+[; ;i2c_master.c: 59:     while (!PIR1bits.SSPIF);
 [e $U 405  ]
 [e :U 406 ]
 [e :U 405 ]
 [e $ ! != -> . . _PIR1bits 0 3 `i -> 0 `i 406  ]
 [e :U 407 ]
-"59
-[; ;i2c_master.c: 59:     PIR1bits.SSPIF = 0;
+"61
+[; ;i2c_master.c: 61:     PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"66
-[; ;i2c_master.c: 66:     return SSPCON2bits.ACKSTAT;
+"63
+[; ;i2c_master.c: 63:     return SSPCON2bits.ACKSTAT;
 [e ) . . _SSPCON2bits 0 6 ]
 [e $UE 404  ]
-"67
-[; ;i2c_master.c: 67: }
+"64
+[; ;i2c_master.c: 64: }
 [e :UE 404 ]
 }

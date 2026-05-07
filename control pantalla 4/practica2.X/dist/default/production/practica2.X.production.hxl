@@ -1,7 +1,7 @@
 ### HEXMate logfile and output summary ###
 
 ### Command-line arguments ###
- C:\Users\JOHAN\AppData\Local\Temp\xcAsgys.0\driver_tmp_3.o
+ C:\Users\JOHAN\AppData\Local\Temp\xcAsats.0\driver_tmp_3.o
  -Odist/default/production\practica2.X.production.hex
  -logfile=dist/default/production\practica2.X.production.hxl
  -addressing=1
@@ -9,25 +9,48 @@
 
 ### Memory Usage ###
  Input file ranges:
-  0h - 3h		(C:\Users\JOHAN\AppData\Local\Temp\xcAsgys.0\driver_tmp_3.o)
-  73F2h - 7FFAh		(C:\Users\JOHAN\AppData\Local\Temp\xcAsgys.0\driver_tmp_3.o)
-  7FFCh - 7FFFh		(C:\Users\JOHAN\AppData\Local\Temp\xcAsgys.0\driver_tmp_3.o)
-  300000h - 30000Dh		(C:\Users\JOHAN\AppData\Local\Temp\xcAsgys.0\driver_tmp_3.o)
+  0h - 3h		(C:\Users\JOHAN\AppData\Local\Temp\xcAsats.0\driver_tmp_3.o)
+  7288h - 7FFAh		(C:\Users\JOHAN\AppData\Local\Temp\xcAsats.0\driver_tmp_3.o)
+  7FFCh - 7FFFh		(C:\Users\JOHAN\AppData\Local\Temp\xcAsats.0\driver_tmp_3.o)
+  300000h - 30000Dh		(C:\Users\JOHAN\AppData\Local\Temp\xcAsats.0\driver_tmp_3.o)
  Unused ranges:
-  4h - 73F1h
+  4h - 7287h
   7FFBh - 7FFBh
   8000h - 2FFFFFh
 
 ### Hex Memory Map ###
  Legend:
   -- = Unused memory
-  H1 = Input file             (C:\Users\JOHAN\AppData\Local\Temp\xcAsgys.0\driver_tmp_3.o)
+  H1 = Input file             (C:\Users\JOHAN\AppData\Local\Temp\xcAsats.0\driver_tmp_3.o)
 ----------------------------------------------------------
          | 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 ----------------------------------------------------------
 00000000 | H1 H1 H1 H1 -- -- -- -- -- -- -- -- -- -- -- --
 ----------------------------------------------------------
-000073F0 | -- -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007280 | -- -- -- -- -- -- -- -- H1 H1 H1 H1 H1 H1 H1 H1
+00007290 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000072A0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000072B0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000072C0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000072D0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000072E0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000072F0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007300 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007310 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007320 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007330 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007340 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007350 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007360 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007370 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007380 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00007390 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000073A0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000073B0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000073C0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000073D0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000073E0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000073F0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00007400 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00007410 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00007420 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1

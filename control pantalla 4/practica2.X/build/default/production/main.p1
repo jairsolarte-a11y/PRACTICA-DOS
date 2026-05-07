@@ -1,10 +1,10 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
-"21 main.c
-[; ;main.c: 21: static void System_Init(void);
+"36 main.c
+[; ;main.c: 36: static void System_Init(void);
 [v _System_Init `(v ~T0 @X0 0 sf ]
-"22
-[; ;main.c: 22: static void Startup_LED_Test(void);
+"37
+[; ;main.c: 37: static void Startup_LED_Test(void);
 [v _Startup_LED_Test `(v ~T0 @X0 0 sf ]
 "20 ./ssd1306.h
 [; ;./ssd1306.h: 20: void SSD1306_ClearDisplay(void);
@@ -15,17 +15,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 "24
 [; ;./ssd1306.h: 24: void SSD1306_WriteString(const char *str);
 [v _SSD1306_WriteString `(v ~T0 @X0 0 ef1`*Cuc ]
+"39 main.c
+[; ;main.c: 39: static uint16_t Read_LM35_Temperature_X10(void);
+[v _Read_LM35_Temperature_X10 `(us ~T0 @X0 0 sf ]
 "7 ./adc.h
 [; ;./adc.h: 7: uint16_t ADC_Read(uint8_t channel);
 [v _ADC_Read `(us ~T0 @X0 0 ef1`uc ]
-"24 main.c
-[; ;main.c: 24: static uint16_t Read_LM35_Temperature_X10(void);
-[v _Read_LM35_Temperature_X10 `(us ~T0 @X0 0 sf ]
-"25
-[; ;main.c: 25: static void Process_Components(uint16_t temperature_x10);
+"40 main.c
+[; ;main.c: 40: static void Process_Components(uint16_t mq135_adc);
 [v _Process_Components `(v ~T0 @X0 0 sf1`us ]
-"26
-[; ;main.c: 26: static void Display_Update(uint16_t adc_value, uint16_t temperature_x10);
+"41
+[; ;main.c: 41: static void Display_Update(uint16_t temperature_x10, uint16_t mq135_adc);
 [v _Display_Update `(v ~T0 @X0 0 sf2`us`us ]
 [v F205 `(v ~T0 @X0 1 tf1`ul ]
 "20 C:\Program Files\Microchip\xc8\v3.10\pic\include/builtins.h
@@ -79,15 +79,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "19 ./ssd1306.h
 [; ;./ssd1306.h: 19: void SSD1306_Init(void);
 [v _SSD1306_Init `(v ~T0 @X0 0 ef ]
-"28 main.c
-[; ;main.c: 28: static void UInt16_To_String(uint16_t value, char *buffer);
-[v _UInt16_To_String `(v ~T0 @X0 0 sf2`us`*uc ]
-"29
-[; ;main.c: 29: static void Temperature_To_String(uint16_t temperature_x10, char *buffer);
+"44 main.c
+[; ;main.c: 44: static void Temperature_To_String(uint16_t temperature_x10, char *buffer);
 [v _Temperature_To_String `(v ~T0 @X0 0 sf2`us`*uc ]
+"43
+[; ;main.c: 43: static void UInt16_To_String(uint16_t value, char *buffer);
+[v _UInt16_To_String `(v ~T0 @X0 0 sf2`us`*uc ]
+"12 ./mq135.h
+[; ;./mq135.h: 12: uint8_t MQ135_Get_Level(uint16_t adc_value);
+[v _MQ135_Get_Level `(uc ~T0 @X0 0 ef1`us ]
 "21 ./ssd1306.h
 [; ;./ssd1306.h: 21: void SSD1306_ClearLine(uint8_t page);
 [v _SSD1306_ClearLine `(v ~T0 @X0 0 ef1`uc ]
+"13 ./mq135.h
+[; ;./mq135.h: 13: const char* MQ135_Get_Text(uint8_t level);
+[v _MQ135_Get_Text `(*Cuc ~T0 @X0 0 ef1`uc ]
 "52 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 52: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -599,498 +605,506 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8891: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 [v $root$_main `(v ~T0 @X0 0 e ]
-"31 main.c
-[; ;main.c: 31: void main(void)
+"46 main.c
+[; ;main.c: 46: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"32
-[; ;main.c: 32: {
+"47
+[; ;main.c: 47: {
 {
 [e :U _main ]
 [f ]
-"33
-[; ;main.c: 33:     uint16_t adc_value;
-[v _adc_value `us ~T0 @X0 1 a ]
-"34
-[; ;main.c: 34:     uint16_t temperature_x10;
-[v _temperature_x10 `us ~T0 @X0 1 a ]
-"36
-[; ;main.c: 36:     System_Init();
-[e ( _System_Init ..  ]
-"38
-[; ;main.c: 38:     Startup_LED_Test();
-[e ( _Startup_LED_Test ..  ]
-"40
-[; ;main.c: 40:     SSD1306_ClearDisplay();
-[e ( _SSD1306_ClearDisplay ..  ]
-"42
-[; ;main.c: 42:     SSD1306_SetCursor(0, 0);
-[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-"43
-[; ;main.c: 43:     SSD1306_WriteString("SENSOR LM35");
-[e ( _SSD1306_WriteString (1 :s 1C ]
-"45
-[; ;main.c: 45:     SSD1306_SetCursor(0, 1);
-[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
-"46
-[; ;main.c: 46:     SSD1306_WriteString("PIC18F4550");
-[e ( _SSD1306_WriteString (1 :s 2C ]
 "48
-[; ;main.c: 48:     SSD1306_SetCursor(0, 6);
-[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 6 `i `uc ]
+[; ;main.c: 48:     uint16_t temperature_x10;
+[v _temperature_x10 `us ~T0 @X0 1 a ]
 "49
-[; ;main.c: 49:     SSD1306_WriteString("Temp real en C");
-[e ( _SSD1306_WriteString (1 :s 3C ]
+[; ;main.c: 49:     uint16_t mq135_adc;
+[v _mq135_adc `us ~T0 @X0 1 a ]
 "51
-[; ;main.c: 51:     while (1)
-[e :U 393 ]
-"52
-[; ;main.c: 52:     {
-{
+[; ;main.c: 51:     System_Init();
+[e ( _System_Init ..  ]
+"53
+[; ;main.c: 53:     Startup_LED_Test();
+[e ( _Startup_LED_Test ..  ]
+"55
+[; ;main.c: 55:     SSD1306_ClearDisplay();
+[e ( _SSD1306_ClearDisplay ..  ]
 "57
-[; ;main.c: 57:         adc_value = ADC_Read(0);
-[e = _adc_value ( _ADC_Read (1 -> -> 0 `i `uc ]
+[; ;main.c: 57:     SSD1306_SetCursor(0, 0);
+[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"58
+[; ;main.c: 58:     SSD1306_WriteString("SISTEMA AMBIENTAL");
+[e ( _SSD1306_WriteString (1 :s 1C ]
+"60
+[; ;main.c: 60:     SSD1306_SetCursor(0, 1);
+[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
+"61
+[; ;main.c: 61:     SSD1306_WriteString("LM35 + MQ135");
+[e ( _SSD1306_WriteString (1 :s 2C ]
 "63
-[; ;main.c: 63:         temperature_x10 = Read_LM35_Temperature_X10();
+[; ;main.c: 63:     while (1)
+[e :U 393 ]
+"64
+[; ;main.c: 64:     {
+{
+"65
+[; ;main.c: 65:         temperature_x10 = Read_LM35_Temperature_X10();
 [e = _temperature_x10 ( _Read_LM35_Temperature_X10 ..  ]
-"70
-[; ;main.c: 70:         Process_Components(temperature_x10);
-[e ( _Process_Components (1 _temperature_x10 ]
-"76
-[; ;main.c: 76:         Display_Update(adc_value, temperature_x10);
-[e ( _Display_Update (2 , _adc_value _temperature_x10 ]
-"78
-[; ;main.c: 78:         _delay((unsigned long)((500)*(8000000UL/4000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
-"79
-[; ;main.c: 79:     }
+"67
+[; ;main.c: 67:         mq135_adc = ADC_Read(1u);
+[e = _mq135_adc ( _ADC_Read (1 -> -> 1 `ui `uc ]
+"69
+[; ;main.c: 69:         Process_Components(mq135_adc);
+[e ( _Process_Components (1 _mq135_adc ]
+"71
+[; ;main.c: 71:         Display_Update(temperature_x10, mq135_adc);
+[e ( _Display_Update (2 , _temperature_x10 _mq135_adc ]
+"73
+[; ;main.c: 73:         _delay((unsigned long)((600)*(8000000UL/4000.0)));
+[e ( __delay (1 -> * -> -> 600 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
+"74
+[; ;main.c: 74:     }
 }
 [e :U 392 ]
 [e $U 393  ]
 [e :U 394 ]
-"80
-[; ;main.c: 80: }
+"75
+[; ;main.c: 75: }
 [e :UE 391 ]
 }
-"82
-[; ;main.c: 82: static void System_Init(void)
+"77
+[; ;main.c: 77: static void System_Init(void)
 [v _System_Init `(v ~T0 @X0 1 sf ]
-"83
-[; ;main.c: 83: {
+"78
+[; ;main.c: 78: {
 {
 [e :U _System_Init ]
 [f ]
-"88
-[; ;main.c: 88:     OSCCON = 0x72;
+"83
+[; ;main.c: 83:     OSCCON = 0x72;
 [e = _OSCCON -> -> 114 `i `uc ]
-"94
-[; ;main.c: 94:     CMCON = 0x07;
+"89
+[; ;main.c: 89:     CMCON = 0x07;
 [e = _CMCON -> -> 7 `i `uc ]
-"95
-[; ;main.c: 95:     CVRCON = 0x00;
+"90
+[; ;main.c: 90:     CVRCON = 0x00;
 [e = _CVRCON -> -> 0 `i `uc ]
-"101
-[; ;main.c: 101:     TRISDbits.TRISD0 = 0;
+"96
+[; ;main.c: 96:     TRISDbits.TRISD0 = 0;
 [e = . . _TRISDbits 0 0 -> -> 0 `i `uc ]
-"102
-[; ;main.c: 102:     LATDbits.LATD0 = 0;
+"97
+[; ;main.c: 97:     LATDbits.LATD0 = 0;
 [e = . . _LATDbits 0 0 -> -> 0 `i `uc ]
-"109
-[; ;main.c: 109:     ADC_Init();
+"105
+[; ;main.c: 105:     ADC_Init();
 [e ( _ADC_Init ..  ]
-"121
-[; ;main.c: 121:     I2C_Master_Init(100000UL);
+"113
+[; ;main.c: 113:     I2C_Master_Init(100000UL);
 [e ( _I2C_Master_Init (1 -> 100000 `ul ]
-"127
-[; ;main.c: 127:     SSD1306_Init();
+"119
+[; ;main.c: 119:     SSD1306_Init();
 [e ( _SSD1306_Init ..  ]
-"128
-[; ;main.c: 128: }
+"120
+[; ;main.c: 120: }
 [e :UE 395 ]
 }
-"130
-[; ;main.c: 130: static void Startup_LED_Test(void)
+"122
+[; ;main.c: 122: static void Startup_LED_Test(void)
 [v _Startup_LED_Test `(v ~T0 @X0 1 sf ]
-"131
-[; ;main.c: 131: {
+"123
+[; ;main.c: 123: {
 {
 [e :U _Startup_LED_Test ]
 [f ]
-"132
-[; ;main.c: 132:     uint8_t i;
+"124
+[; ;main.c: 124:     uint8_t i;
 [v _i `uc ~T0 @X0 1 a ]
-"134
-[; ;main.c: 134:     for (i = 0; i < 3; i++)
+"126
+[; ;main.c: 126:     for (i = 0; i < 3; i++)
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 3 `i 397  ]
 [e $U 398  ]
 [e :U 397 ]
-"135
-[; ;main.c: 135:     {
+"127
+[; ;main.c: 127:     {
 {
-"136
-[; ;main.c: 136:         LATDbits.LATD0 = 1;
+"128
+[; ;main.c: 128:         LATDbits.LATD0 = 1;
 [e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
-"137
-[; ;main.c: 137:         _delay((unsigned long)((150)*(8000000UL/4000.0)));
+"129
+[; ;main.c: 129:         _delay((unsigned long)((150)*(8000000UL/4000.0)));
 [e ( __delay (1 -> * -> -> 150 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
-"139
-[; ;main.c: 139:         LATDbits.LATD0 = 0;
+"131
+[; ;main.c: 131:         LATDbits.LATD0 = 0;
 [e = . . _LATDbits 0 0 -> -> 0 `i `uc ]
-"140
-[; ;main.c: 140:         _delay((unsigned long)((150)*(8000000UL/4000.0)));
+"132
+[; ;main.c: 132:         _delay((unsigned long)((150)*(8000000UL/4000.0)));
 [e ( __delay (1 -> * -> -> 150 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
-"141
-[; ;main.c: 141:     }
+"133
+[; ;main.c: 133:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 3 `i 397  ]
 [e :U 398 ]
 }
-"142
-[; ;main.c: 142: }
+"134
+[; ;main.c: 134: }
 [e :UE 396 ]
 }
-"144
-[; ;main.c: 144: static uint16_t Read_LM35_Temperature_X10(void)
+"136
+[; ;main.c: 136: static uint16_t Read_LM35_Temperature_X10(void)
 [v _Read_LM35_Temperature_X10 `(us ~T0 @X0 1 sf ]
-"145
-[; ;main.c: 145: {
+"137
+[; ;main.c: 137: {
 {
 [e :U _Read_LM35_Temperature_X10 ]
 [f ]
-"146
-[; ;main.c: 146:     uint16_t adc_value;
+"138
+[; ;main.c: 138:     uint16_t adc_value;
 [v _adc_value `us ~T0 @X0 1 a ]
-"147
-[; ;main.c: 147:     uint32_t temperature_x10;
+"139
+[; ;main.c: 139:     uint32_t temperature_x10;
 [v _temperature_x10 `ul ~T0 @X0 1 a ]
-"153
-[; ;main.c: 153:     adc_value = ADC_Read(0);
-[e = _adc_value ( _ADC_Read (1 -> -> 0 `i `uc ]
-"177
-[; ;main.c: 177:     temperature_x10 = ((uint32_t)adc_value * 5000UL) / 1023UL;
+"141
+[; ;main.c: 141:     adc_value = ADC_Read(0u);
+[e = _adc_value ( _ADC_Read (1 -> -> 0 `ui `uc ]
+"157
+[; ;main.c: 157:     temperature_x10 = ((uint32_t)adc_value * 5000UL) / 1023UL;
 [e = _temperature_x10 / * -> _adc_value `ul -> 5000 `ul -> 1023 `ul ]
-"179
-[; ;main.c: 179:     return (uint16_t)temperature_x10;
+"159
+[; ;main.c: 159:     return (uint16_t)temperature_x10;
 [e ) -> _temperature_x10 `us ]
 [e $UE 400  ]
-"180
-[; ;main.c: 180: }
+"160
+[; ;main.c: 160: }
 [e :UE 400 ]
 }
-"182
-[; ;main.c: 182: static void Process_Components(uint16_t temperature_x10)
+"162
+[; ;main.c: 162: static void Process_Components(uint16_t mq135_adc)
 [v _Process_Components `(v ~T0 @X0 1 sf1`us ]
-"183
-[; ;main.c: 183: {
+"163
+[; ;main.c: 163: {
 {
 [e :U _Process_Components ]
-"182
-[; ;main.c: 182: static void Process_Components(uint16_t temperature_x10)
-[v _temperature_x10 `us ~T0 @X0 1 r1 ]
-"183
-[; ;main.c: 183: {
+"162
+[; ;main.c: 162: static void Process_Components(uint16_t mq135_adc)
+[v _mq135_adc `us ~T0 @X0 1 r1 ]
+"163
+[; ;main.c: 163: {
 [f ]
-"192
-[; ;main.c: 192:     if (temperature_x10 >= 300u)
-[e $ ! >= -> _temperature_x10 `ui -> 300 `ui 402  ]
-"193
-[; ;main.c: 193:     {
+"168
+[; ;main.c: 168:     if (mq135_adc >= 601u)
+[e $ ! >= -> _mq135_adc `ui -> 601 `ui 402  ]
+"169
+[; ;main.c: 169:     {
 {
-"194
-[; ;main.c: 194:         LATDbits.LATD0 = 1;
+"170
+[; ;main.c: 170:         LATDbits.LATD0 = 1;
 [e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
-"195
-[; ;main.c: 195:     }
+"171
+[; ;main.c: 171:     }
 }
 [e $U 403  ]
-"196
-[; ;main.c: 196:     else
+"172
+[; ;main.c: 172:     else
 [e :U 402 ]
-"197
-[; ;main.c: 197:     {
+"173
+[; ;main.c: 173:     {
 {
-"198
-[; ;main.c: 198:         LATDbits.LATD0 = 0;
+"174
+[; ;main.c: 174:         LATDbits.LATD0 = 0;
 [e = . . _LATDbits 0 0 -> -> 0 `i `uc ]
-"199
-[; ;main.c: 199:     }
+"175
+[; ;main.c: 175:     }
 }
 [e :U 403 ]
-"200
-[; ;main.c: 200: }
+"176
+[; ;main.c: 176: }
 [e :UE 401 ]
 }
-"202
-[; ;main.c: 202: static void Display_Update(uint16_t adc_value, uint16_t temperature_x10)
+"178
+[; ;main.c: 178: static void Display_Update(uint16_t temperature_x10, uint16_t mq135_adc)
 [v _Display_Update `(v ~T0 @X0 1 sf2`us`us ]
-"203
-[; ;main.c: 203: {
+"179
+[; ;main.c: 179: {
 {
 [e :U _Display_Update ]
-"202
-[; ;main.c: 202: static void Display_Update(uint16_t adc_value, uint16_t temperature_x10)
-[v _adc_value `us ~T0 @X0 1 r1 ]
-[v _temperature_x10 `us ~T0 @X0 1 r2 ]
-"203
-[; ;main.c: 203: {
+"178
+[; ;main.c: 178: static void Display_Update(uint16_t temperature_x10, uint16_t mq135_adc)
+[v _temperature_x10 `us ~T0 @X0 1 r1 ]
+[v _mq135_adc `us ~T0 @X0 1 r2 ]
+"179
+[; ;main.c: 179: {
 [f ]
-"204
-[; ;main.c: 204:     char adc_text[6];
-[v _adc_text `uc ~T0 @X0 -> 6 `i a ]
-"205
-[; ;main.c: 205:     char temp_text[8];
+"180
+[; ;main.c: 180:     char temp_text[8];
 [v _temp_text `uc ~T0 @X0 -> 8 `i a ]
-"207
-[; ;main.c: 207:     UInt16_To_String(adc_value, adc_text);
-[e ( _UInt16_To_String (2 , _adc_value &U _adc_text ]
-"208
-[; ;main.c: 208:     Temperature_To_String(temperature_x10, temp_text);
+"181
+[; ;main.c: 181:     char mq_text[6];
+[v _mq_text `uc ~T0 @X0 -> 6 `i a ]
+"182
+[; ;main.c: 182:     uint8_t mq_level;
+[v _mq_level `uc ~T0 @X0 1 a ]
+"184
+[; ;main.c: 184:     Temperature_To_String(temperature_x10, temp_text);
 [e ( _Temperature_To_String (2 , _temperature_x10 &U _temp_text ]
-"210
-[; ;main.c: 210:     SSD1306_ClearLine(3);
+"185
+[; ;main.c: 185:     UInt16_To_String(mq135_adc, mq_text);
+[e ( _UInt16_To_String (2 , _mq135_adc &U _mq_text ]
+"187
+[; ;main.c: 187:     mq_level = MQ135_Get_Level(mq135_adc);
+[e = _mq_level ( _MQ135_Get_Level (1 _mq135_adc ]
+"189
+[; ;main.c: 189:     SSD1306_ClearLine(3);
 [e ( _SSD1306_ClearLine (1 -> -> 3 `i `uc ]
-"211
-[; ;main.c: 211:     SSD1306_SetCursor(0, 3);
+"190
+[; ;main.c: 190:     SSD1306_SetCursor(0, 3);
 [e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 3 `i `uc ]
-"212
-[; ;main.c: 212:     SSD1306_WriteString("ADC: ");
-[e ( _SSD1306_WriteString (1 :s 4C ]
-"213
-[; ;main.c: 213:     SSD1306_WriteString(adc_text);
-[e ( _SSD1306_WriteString (1 -> &U _adc_text `*Cuc ]
-"215
-[; ;main.c: 215:     SSD1306_ClearLine(4);
-[e ( _SSD1306_ClearLine (1 -> -> 4 `i `uc ]
-"216
-[; ;main.c: 216:     SSD1306_SetCursor(0, 4);
-[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 4 `i `uc ]
-"217
-[; ;main.c: 217:     SSD1306_WriteString("TEMP: ");
-[e ( _SSD1306_WriteString (1 :s 5C ]
-"218
-[; ;main.c: 218:     SSD1306_WriteString(temp_text);
+"191
+[; ;main.c: 191:     SSD1306_WriteString("TEMP: ");
+[e ( _SSD1306_WriteString (1 :s 3C ]
+"192
+[; ;main.c: 192:     SSD1306_WriteString(temp_text);
 [e ( _SSD1306_WriteString (1 -> &U _temp_text `*Cuc ]
-"219
-[; ;main.c: 219:     SSD1306_WriteString(" C");
-[e ( _SSD1306_WriteString (1 :s 6C ]
-"221
-[; ;main.c: 221:     SSD1306_ClearLine(5);
+"193
+[; ;main.c: 193:     SSD1306_WriteString(" C");
+[e ( _SSD1306_WriteString (1 :s 4C ]
+"195
+[; ;main.c: 195:     SSD1306_ClearLine(4);
+[e ( _SSD1306_ClearLine (1 -> -> 4 `i `uc ]
+"196
+[; ;main.c: 196:     SSD1306_SetCursor(0, 4);
+[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 4 `i `uc ]
+"197
+[; ;main.c: 197:     SSD1306_WriteString("MQ135: ");
+[e ( _SSD1306_WriteString (1 :s 5C ]
+"198
+[; ;main.c: 198:     SSD1306_WriteString(mq_text);
+[e ( _SSD1306_WriteString (1 -> &U _mq_text `*Cuc ]
+"200
+[; ;main.c: 200:     SSD1306_ClearLine(5);
 [e ( _SSD1306_ClearLine (1 -> -> 5 `i `uc ]
-"222
-[; ;main.c: 222:     SSD1306_SetCursor(0, 5);
+"201
+[; ;main.c: 201:     SSD1306_SetCursor(0, 5);
 [e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 5 `i `uc ]
-"224
-[; ;main.c: 224:     if (temperature_x10 >= 300u)
-[e $ ! >= -> _temperature_x10 `ui -> 300 `ui 405  ]
-"225
-[; ;main.c: 225:     {
+"202
+[; ;main.c: 202:     SSD1306_WriteString(MQ135_Get_Text(mq_level));
+[e ( _SSD1306_WriteString (1 ( _MQ135_Get_Text (1 _mq_level ]
+"204
+[; ;main.c: 204:     SSD1306_ClearLine(6);
+[e ( _SSD1306_ClearLine (1 -> -> 6 `i `uc ]
+"205
+[; ;main.c: 205:     SSD1306_SetCursor(0, 6);
+[e ( _SSD1306_SetCursor (2 , -> -> 0 `i `uc -> -> 6 `i `uc ]
+"207
+[; ;main.c: 207:     if (mq135_adc >= 601u)
+[e $ ! >= -> _mq135_adc `ui -> 601 `ui 405  ]
+"208
+[; ;main.c: 208:     {
 {
-"226
-[; ;main.c: 226:         SSD1306_WriteString("LED: ON ");
-[e ( _SSD1306_WriteString (1 :s 7C ]
-"227
-[; ;main.c: 227:     }
+"209
+[; ;main.c: 209:         SSD1306_WriteString("LED ALARMA: ON");
+[e ( _SSD1306_WriteString (1 :s 6C ]
+"210
+[; ;main.c: 210:     }
 }
 [e $U 406  ]
-"228
-[; ;main.c: 228:     else
+"211
+[; ;main.c: 211:     else
 [e :U 405 ]
-"229
-[; ;main.c: 229:     {
+"212
+[; ;main.c: 212:     {
 {
-"230
-[; ;main.c: 230:         SSD1306_WriteString("LED: OFF");
-[e ( _SSD1306_WriteString (1 :s 8C ]
-"231
-[; ;main.c: 231:     }
+"213
+[; ;main.c: 213:         SSD1306_WriteString("LED ALARMA: OFF");
+[e ( _SSD1306_WriteString (1 :s 7C ]
+"214
+[; ;main.c: 214:     }
 }
 [e :U 406 ]
-"232
-[; ;main.c: 232: }
+"215
+[; ;main.c: 215: }
 [e :UE 404 ]
 }
-"234
-[; ;main.c: 234: static void UInt16_To_String(uint16_t value, char *buffer)
+"217
+[; ;main.c: 217: static void UInt16_To_String(uint16_t value, char *buffer)
 [v _UInt16_To_String `(v ~T0 @X0 1 sf2`us`*uc ]
-"235
-[; ;main.c: 235: {
+"218
+[; ;main.c: 218: {
 {
 [e :U _UInt16_To_String ]
-"234
-[; ;main.c: 234: static void UInt16_To_String(uint16_t value, char *buffer)
+"217
+[; ;main.c: 217: static void UInt16_To_String(uint16_t value, char *buffer)
 [v _value `us ~T0 @X0 1 r1 ]
 [v _buffer `*uc ~T0 @X0 1 r2 ]
-"235
-[; ;main.c: 235: {
+"218
+[; ;main.c: 218: {
 [f ]
-"236
-[; ;main.c: 236:     uint8_t i = 0;
+"219
+[; ;main.c: 219:     uint8_t i = 0;
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-"237
-[; ;main.c: 237:     uint8_t j = 0;
+"220
+[; ;main.c: 220:     uint8_t j = 0;
 [v _j `uc ~T0 @X0 1 a ]
 [e = _j -> -> 0 `i `uc ]
-"238
-[; ;main.c: 238:     char temp[6];
+"221
+[; ;main.c: 221:     char temp[6];
 [v _temp `uc ~T0 @X0 -> 6 `i a ]
-"240
-[; ;main.c: 240:     if (value == 0)
+"223
+[; ;main.c: 223:     if (value == 0)
 [e $ ! == -> _value `ui -> -> 0 `i `ui 408  ]
-"241
-[; ;main.c: 241:     {
+"224
+[; ;main.c: 224:     {
 {
-"242
-[; ;main.c: 242:         buffer[0] = '0';
+"225
+[; ;main.c: 225:         buffer[0] = '0';
 [e = *U + _buffer * -> -> 0 `i `x -> -> # *U _buffer `i `x -> -> 48 `ui `uc ]
-"243
-[; ;main.c: 243:         buffer[1] = '\0';
+"226
+[; ;main.c: 226:         buffer[1] = '\0';
 [e = *U + _buffer * -> -> 1 `i `x -> -> # *U _buffer `i `x -> -> 0 `ui `uc ]
-"244
-[; ;main.c: 244:         return;
+"227
+[; ;main.c: 227:         return;
 [e $UE 407  ]
-"245
-[; ;main.c: 245:     }
+"228
+[; ;main.c: 228:     }
 }
 [e :U 408 ]
-"247
-[; ;main.c: 247:     while (value > 0)
+"230
+[; ;main.c: 230:     while (value > 0)
 [e $U 409  ]
 [e :U 410 ]
-"248
-[; ;main.c: 248:     {
+"231
+[; ;main.c: 231:     {
 {
-"249
-[; ;main.c: 249:         temp[i] = (char)((value % 10) + '0');
-[e = *U + &U _temp * -> _i `ux -> -> # *U &U _temp `ui `ux -> + % -> _value `ui -> -> 10 `i `ui -> 48 `ui `uc ]
-"250
-[; ;main.c: 250:         value = value / 10;
-[e = _value -> / -> _value `ui -> -> 10 `i `ui `us ]
-"251
-[; ;main.c: 251:         i++;
+"232
+[; ;main.c: 232:         temp[i] = (char)((value % 10u) + '0');
+[e = *U + &U _temp * -> _i `ux -> -> # *U &U _temp `ui `ux -> + % -> _value `ui -> 10 `ui -> 48 `ui `uc ]
+"233
+[; ;main.c: 233:         value = value / 10u;
+[e = _value -> / -> _value `ui -> 10 `ui `us ]
+"234
+[; ;main.c: 234:         i++;
 [e ++ _i -> -> 1 `i `uc ]
-"252
-[; ;main.c: 252:     }
+"235
+[; ;main.c: 235:     }
 }
 [e :U 409 ]
-"247
-[; ;main.c: 247:     while (value > 0)
+"230
+[; ;main.c: 230:     while (value > 0)
 [e $ > -> _value `ui -> -> 0 `i `ui 410  ]
 [e :U 411 ]
-"254
-[; ;main.c: 254:     while (i > 0)
+"237
+[; ;main.c: 237:     while (i > 0)
 [e $U 412  ]
 [e :U 413 ]
-"255
-[; ;main.c: 255:     {
+"238
+[; ;main.c: 238:     {
 {
-"256
-[; ;main.c: 256:         i--;
+"239
+[; ;main.c: 239:         i--;
 [e -- _i -> -> 1 `i `uc ]
-"257
-[; ;main.c: 257:         buffer[j] = temp[i];
+"240
+[; ;main.c: 240:         buffer[j] = temp[i];
 [e = *U + _buffer * -> _j `ux -> -> # *U _buffer `ui `ux *U + &U _temp * -> _i `ux -> -> # *U &U _temp `ui `ux ]
-"258
-[; ;main.c: 258:         j++;
+"241
+[; ;main.c: 241:         j++;
 [e ++ _j -> -> 1 `i `uc ]
-"259
-[; ;main.c: 259:     }
+"242
+[; ;main.c: 242:     }
 }
 [e :U 412 ]
-"254
-[; ;main.c: 254:     while (i > 0)
+"237
+[; ;main.c: 237:     while (i > 0)
 [e $ > -> _i `i -> 0 `i 413  ]
 [e :U 414 ]
-"261
-[; ;main.c: 261:     buffer[j] = '\0';
+"244
+[; ;main.c: 244:     buffer[j] = '\0';
 [e = *U + _buffer * -> _j `ux -> -> # *U _buffer `ui `ux -> -> 0 `ui `uc ]
-"262
-[; ;main.c: 262: }
+"245
+[; ;main.c: 245: }
 [e :UE 407 ]
 }
-"264
-[; ;main.c: 264: static void Temperature_To_String(uint16_t temperature_x10, char *buffer)
+"247
+[; ;main.c: 247: static void Temperature_To_String(uint16_t temperature_x10, char *buffer)
 [v _Temperature_To_String `(v ~T0 @X0 1 sf2`us`*uc ]
-"265
-[; ;main.c: 265: {
+"248
+[; ;main.c: 248: {
 {
 [e :U _Temperature_To_String ]
-"264
-[; ;main.c: 264: static void Temperature_To_String(uint16_t temperature_x10, char *buffer)
+"247
+[; ;main.c: 247: static void Temperature_To_String(uint16_t temperature_x10, char *buffer)
 [v _temperature_x10 `us ~T0 @X0 1 r1 ]
 [v _buffer `*uc ~T0 @X0 1 r2 ]
-"265
-[; ;main.c: 265: {
+"248
+[; ;main.c: 248: {
 [f ]
-"266
-[; ;main.c: 266:     uint16_t integer_part;
+"249
+[; ;main.c: 249:     uint16_t integer_part;
 [v _integer_part `us ~T0 @X0 1 a ]
-"267
-[; ;main.c: 267:     uint16_t decimal_part;
+"250
+[; ;main.c: 250:     uint16_t decimal_part;
 [v _decimal_part `us ~T0 @X0 1 a ]
-"268
-[; ;main.c: 268:     char integer_text[6];
+"251
+[; ;main.c: 251:     char integer_text[6];
 [v _integer_text `uc ~T0 @X0 -> 6 `i a ]
-"269
-[; ;main.c: 269:     uint8_t i = 0;
+"252
+[; ;main.c: 252:     uint8_t i = 0;
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-"271
-[; ;main.c: 271:     integer_part = temperature_x10 / 10;
-[e = _integer_part -> / -> _temperature_x10 `ui -> -> 10 `i `ui `us ]
-"272
-[; ;main.c: 272:     decimal_part = temperature_x10 % 10;
-[e = _decimal_part -> % -> _temperature_x10 `ui -> -> 10 `i `ui `us ]
-"274
-[; ;main.c: 274:     UInt16_To_String(integer_part, integer_text);
+"254
+[; ;main.c: 254:     integer_part = temperature_x10 / 10u;
+[e = _integer_part -> / -> _temperature_x10 `ui -> 10 `ui `us ]
+"255
+[; ;main.c: 255:     decimal_part = temperature_x10 % 10u;
+[e = _decimal_part -> % -> _temperature_x10 `ui -> 10 `ui `us ]
+"257
+[; ;main.c: 257:     UInt16_To_String(integer_part, integer_text);
 [e ( _UInt16_To_String (2 , _integer_part &U _integer_text ]
-"276
-[; ;main.c: 276:     while (integer_text[i] != '\0')
+"259
+[; ;main.c: 259:     while (integer_text[i] != '\0')
 [e $U 416  ]
 [e :U 417 ]
-"277
-[; ;main.c: 277:     {
+"260
+[; ;main.c: 260:     {
 {
-"278
-[; ;main.c: 278:         buffer[i] = integer_text[i];
+"261
+[; ;main.c: 261:         buffer[i] = integer_text[i];
 [e = *U + _buffer * -> _i `ux -> -> # *U _buffer `ui `ux *U + &U _integer_text * -> _i `ux -> -> # *U &U _integer_text `ui `ux ]
-"279
-[; ;main.c: 279:         i++;
+"262
+[; ;main.c: 262:         i++;
 [e ++ _i -> -> 1 `i `uc ]
-"280
-[; ;main.c: 280:     }
+"263
+[; ;main.c: 263:     }
 }
 [e :U 416 ]
-"276
-[; ;main.c: 276:     while (integer_text[i] != '\0')
+"259
+[; ;main.c: 259:     while (integer_text[i] != '\0')
 [e $ != -> *U + &U _integer_text * -> _i `ux -> -> # *U &U _integer_text `ui `ux `ui -> 0 `ui 417  ]
 [e :U 418 ]
-"282
-[; ;main.c: 282:     buffer[i] = '.';
+"265
+[; ;main.c: 265:     buffer[i] = '.';
 [e = *U + _buffer * -> _i `ux -> -> # *U _buffer `ui `ux -> -> 46 `ui `uc ]
-"283
-[; ;main.c: 283:     i++;
+"266
+[; ;main.c: 266:     i++;
 [e ++ _i -> -> 1 `i `uc ]
-"285
-[; ;main.c: 285:     buffer[i] = (char)(decimal_part + '0');
+"268
+[; ;main.c: 268:     buffer[i] = (char)(decimal_part + '0');
 [e = *U + _buffer * -> _i `ux -> -> # *U _buffer `ui `ux -> + -> _decimal_part `ui -> 48 `ui `uc ]
-"286
-[; ;main.c: 286:     i++;
+"269
+[; ;main.c: 269:     i++;
 [e ++ _i -> -> 1 `i `uc ]
-"288
-[; ;main.c: 288:     buffer[i] = '\0';
+"271
+[; ;main.c: 271:     buffer[i] = '\0';
 [e = *U + _buffer * -> _i `ux -> -> # *U _buffer `ui `ux -> -> 0 `ui `uc ]
-"289
-[; ;main.c: 289: }
+"272
+[; ;main.c: 272: }
 [e :UE 415 ]
 }
-[a 8C 76 69 68 58 32 79 70 70 0 ]
-[a 3C 84 101 109 112 32 114 101 97 108 32 101 110 32 67 0 ]
-[a 6C 32 67 0 ]
-[a 1C 83 69 78 83 79 82 32 76 77 51 53 0 ]
-[a 2C 80 73 67 49 56 70 52 53 53 48 0 ]
-[a 7C 76 69 68 58 32 79 78 32 0 ]
-[a 5C 84 69 77 80 58 32 0 ]
-[a 4C 65 68 67 58 32 0 ]
+[a 6C 76 69 68 32 65 76 65 82 77 65 58 32 79 78 0 ]
+[a 1C 83 73 83 84 69 77 65 32 65 77 66 73 69 78 84 65 76 0 ]
+[a 7C 76 69 68 32 65 76 65 82 77 65 58 32 79 70 70 0 ]
+[a 4C 32 67 0 ]
+[a 2C 76 77 51 53 32 43 32 77 81 49 51 53 0 ]
+[a 3C 84 69 77 80 58 32 0 ]
+[a 5C 77 81 49 51 53 58 32 0 ]
