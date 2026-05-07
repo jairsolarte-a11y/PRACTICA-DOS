@@ -1,4 +1,4 @@
-# 1 "adc.c"
+# 1 "light_sensor.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 295 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "adc.c" 2
-# 1 "./adc.h" 1
+# 1 "light_sensor.c" 2
+# 1 "./light_sensor.h" 1
 
 
 
@@ -5915,46 +5915,100 @@ unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 2 3
 # 5 "./system.h" 2
-# 5 "./adc.h" 2
-
-void ADC_Init(void);
-uint16_t ADC_Read(uint8_t channel);
-# 2 "adc.c" 2
-# 11 "adc.c"
-void ADC_Init(void)
+# 5 "./light_sensor.h" 2
+# 29 "./light_sensor.h"
+uint16_t Light_Process_ADC(uint16_t raw_adc);
+uint8_t Light_Get_Level(uint16_t light_value);
+uint8_t Light_Get_Leds_Count(uint8_t level);
+const char* Light_Get_Text(uint8_t level);
+# 2 "light_sensor.c" 2
+# 18 "light_sensor.c"
+uint16_t Light_Process_ADC(uint16_t raw_adc)
 {
-    TRISAbits.TRISA0 = 1;
-    TRISAbits.TRISA1 = 1;
-    TRISAbits.TRISA2 = 1;
-
-    ADCON0 = 0x01;
-# 26 "adc.c"
-    ADCON1 = 0x0C;
+    uint16_t light_value;
 
 
-
-
-
-
-
-    ADCON2 = 0xAA;
-}
-
-uint16_t ADC_Read(uint8_t channel)
-{
-    if (channel > 13)
+    if (raw_adc > 1023u)
     {
-        channel = 0;
+        raw_adc = 1023u;
     }
 
-    ADCON0 &= 0xC3;
-    ADCON0 |= (uint8_t)(channel << 2);
+    light_value = 1023u - raw_adc;
 
-    _delay((unsigned long)((30)*(8000000UL/4000000.0)));
 
-    ADCON0bits.GO_DONE = 1;
 
-    while (ADCON0bits.GO_DONE);
 
-    return (((uint16_t)ADRESH << 8) | ADRESL);
+    return light_value;
+}
+# 46 "light_sensor.c"
+uint8_t Light_Get_Level(uint16_t light_value)
+{
+    if (light_value <= 200u)
+    {
+        return 0u;
+    }
+    else if (light_value <= 400u)
+    {
+        return 1u;
+    }
+    else if (light_value <= 700u)
+    {
+        return 2u;
+    }
+    else if (light_value <= 900u)
+    {
+        return 3u;
+    }
+    else
+    {
+        return 4u;
+    }
+}
+
+uint8_t Light_Get_Leds_Count(uint8_t level)
+{
+    switch (level)
+    {
+        case 0u:
+            return 1u;
+
+        case 1u:
+            return 2u;
+
+        case 2u:
+            return 3u;
+
+        case 3u:
+            return 4u;
+
+        case 4u:
+            return 5u;
+
+        default:
+            return 0u;
+    }
+}
+
+const char* Light_Get_Text(uint8_t level)
+{
+    switch (level)
+    {
+        case 0u:
+            return "MUY OSCURO";
+
+        case 1u:
+            return "POCA LUZ";
+
+        case 2u:
+            return "LUZ MEDIA";
+
+        case 3u:
+            return "MUCHA LUZ";
+
+        case 4u:
+            return "LUZ INTENSA";
+
+        default:
+            return "LUZ ERROR";
+    }
 }

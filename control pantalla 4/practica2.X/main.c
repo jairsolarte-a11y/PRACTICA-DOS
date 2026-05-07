@@ -3,50 +3,80 @@
 #include "i2c_master.h"
 #include "ssd1306.h"
 #include "mq135.h"
+#include "light_sensor.h"
 
 /*
-   Canales ADC
+   Canales ADC usados:
+
+   AN0 / RA0 / pin 2 -> LM35
+   AN1 / RA1 / pin 3 -> MQ135
+   AN2 / RA2 / pin 4 -> Sensor de luz HW-486
 */
 
 #define LM35_CHANNEL        0u
 #define MQ135_CHANNEL       1u
+#define LIGHT_CHANNEL       2u
 
 /*
-   LED de alarma
+   LEDs fisicos para representar intensidad de luz.
+
+   LED 1 -> RD0 / pin 19
+   LED 2 -> RD1 / pin 20
+   LED 3 -> RD2 / pin 21
+   LED 4 -> RD3 / pin 22
+   LED 5 -> RD4 / pin 27
 */
 
-#define LED_LAT             LATDbits.LATD0
-#define LED_TRIS            TRISDbits.TRISD0
+#define LED1_LAT            LATDbits.LATD0
+#define LED2_LAT            LATDbits.LATD1
+#define LED3_LAT            LATDbits.LATD2
+#define LED4_LAT            LATDbits.LATD3
+#define LED5_LAT            LATDbits.LATD4
 
-/*
-   Si MQ135 >= 601, el aire se considera contaminado
-   y se enciende el LED.
-*/
-
-#define MQ135_LED_ON_VALUE  601u
+#define LED1_TRIS           TRISDbits.TRISD0
+#define LED2_TRIS           TRISDbits.TRISD1
+#define LED3_TRIS           TRISDbits.TRISD2
+#define LED4_TRIS           TRISDbits.TRISD3
+#define LED5_TRIS           TRISDbits.TRISD4
 
 /*
    Referencia ADC.
-   Si el PIC esta alimentado con 5V y ADCON1 usa VDD como referencia,
-   este valor debe ser 5000.
+
+   Si el PIC18F4550 esta alimentado con 5V
+   y el ADC usa VDD como referencia, este valor debe ser 5000.
 */
 
 #define ADC_VREF_MV         5000UL
+
+/*
+   Prototipos de funciones internas
+*/
 
 static void System_Init(void);
 static void Startup_LED_Test(void);
 
 static uint16_t Read_LM35_Temperature_X10(void);
-static void Process_Components(uint16_t mq135_adc);
-static void Display_Update(uint16_t temperature_x10, uint16_t mq135_adc);
+
+static void Light_LEDs_Update(uint8_t leds_count);
+static void Process_Components(uint16_t light_adc);
+
+static void Display_Update(uint16_t temperature_x10,
+                           uint16_t mq135_adc,
+                           uint16_t light_adc);
 
 static void UInt16_To_String(uint16_t value, char *buffer);
 static void Temperature_To_String(uint16_t temperature_x10, char *buffer);
+
+/*
+   Funcion principal
+*/
 
 void main(void)
 {
     uint16_t temperature_x10;
     uint16_t mq135_adc;
+    uint16_t light_adc_raw;
+    uint16_t light_adc;
 
     System_Init();
 
@@ -58,26 +88,60 @@ void main(void)
     SSD1306_WriteString("SISTEMA AMBIENTAL");
 
     SSD1306_SetCursor(0, 1);
-    SSD1306_WriteString("LM35 + MQ135");
+    SSD1306_WriteString("LM35 MQ135 LUZ");
 
     while (1)
     {
+        /*
+           Leer temperatura del LM35.
+        */
+
         temperature_x10 = Read_LM35_Temperature_X10();
+
+        /*
+           Leer sensor MQ135.
+        */
 
         mq135_adc = ADC_Read(MQ135_CHANNEL);
 
-        Process_Components(mq135_adc);
+        /*
+           Leer sensor de luz HW-486.
 
-        Display_Update(temperature_x10, mq135_adc);
+           Primero se lee el valor real del ADC.
+           Luego se procesa con Light_Process_ADC().
+
+           Esto corrige el caso del HW-486, donde normalmente:
+           - mucha luz da ADC bajo
+           - oscuridad da ADC alto
+        */
+
+        light_adc_raw = ADC_Read(LIGHT_CHANNEL);
+        light_adc = Light_Process_ADC(light_adc_raw);
+
+        /*
+           Actualizar LEDs fisicos de acuerdo con la luz.
+        */
+
+        Process_Components(light_adc);
+
+        /*
+           Actualizar OLED.
+        */
+
+        Display_Update(temperature_x10, mq135_adc, light_adc);
 
         __delay_ms(600);
     }
 }
 
+/*
+   Inicializacion general del sistema
+*/
+
 static void System_Init(void)
 {
     /*
-       Oscilador interno 8 MHz.
+       Oscilador interno a 8 MHz.
     */
 
     OSCCON = 0x72;
@@ -90,48 +154,84 @@ static void System_Init(void)
     CVRCON = 0x00;
 
     /*
-       LED en RD0 / pin fisico 19.
+       Configurar LEDs de intensidad de luz como salidas.
     */
 
-    LED_TRIS = 0;
-    LED_LAT = 0;
+    LED1_TRIS = 0;
+    LED2_TRIS = 0;
+    LED3_TRIS = 0;
+    LED4_TRIS = 0;
+    LED5_TRIS = 0;
+
+    LED1_LAT = 0;
+    LED2_LAT = 0;
+    LED3_LAT = 0;
+    LED4_LAT = 0;
+    LED5_LAT = 0;
 
     /*
-       ADC:
+       Inicializar ADC.
+
        AN0 -> LM35
        AN1 -> MQ135
+       AN2 -> sensor de luz
     */
 
     ADC_Init();
 
     /*
-       I2C OLED:
+       Inicializar I2C.
+
+       OLED SSD1306:
        SDA -> RB0 / pin 33
        SCL -> RB1 / pin 34
+
+       Recuerda conservar en i2c_master.c:
+       SSPADD = 119u;
     */
 
     I2C_Master_Init(100000UL);
 
     /*
-       OLED SSD1306.
+       Inicializar OLED.
     */
 
     SSD1306_Init();
 }
 
+/*
+   Prueba inicial de LEDs
+*/
+
 static void Startup_LED_Test(void)
 {
-    uint8_t i;
+    LED1_LAT = 1;
+    __delay_ms(120);
 
-    for (i = 0; i < 3; i++)
-    {
-        LED_LAT = 1;
-        __delay_ms(150);
+    LED2_LAT = 1;
+    __delay_ms(120);
 
-        LED_LAT = 0;
-        __delay_ms(150);
-    }
+    LED3_LAT = 1;
+    __delay_ms(120);
+
+    LED4_LAT = 1;
+    __delay_ms(120);
+
+    LED5_LAT = 1;
+    __delay_ms(300);
+
+    LED1_LAT = 0;
+    LED2_LAT = 0;
+    LED3_LAT = 0;
+    LED4_LAT = 0;
+    LED5_LAT = 0;
+
+    __delay_ms(200);
 }
+
+/*
+   Lectura y conversion del LM35
+*/
 
 static uint16_t Read_LM35_Temperature_X10(void)
 {
@@ -144,13 +244,15 @@ static uint16_t Read_LM35_Temperature_X10(void)
        LM35:
        10 mV = 1 grado Celsius.
 
-       Con ADC_VREF_MV = 5000:
+       ADC:
+       0 - 1023 representa 0V - 5V.
+
        Voltaje_mV = ADC * 5000 / 1023
 
-       Temperatura con un decimal:
+       Para mostrar temperatura con un decimal:
        temperature_x10 = temperatura * 10
 
-       Para LM35:
+       En LM35:
        temperature_x10 = Voltaje_mV
     */
 
@@ -159,60 +261,152 @@ static uint16_t Read_LM35_Temperature_X10(void)
     return (uint16_t)temperature_x10;
 }
 
-static void Process_Components(uint16_t mq135_adc)
+/*
+   Control de los 5 LEDs de luz
+*/
+
+static void Light_LEDs_Update(uint8_t leds_count)
 {
     /*
-       LED como alarma de aire contaminado.
+       Apagar todos primero.
     */
 
-    if (mq135_adc >= MQ135_LED_ON_VALUE)
+    LED1_LAT = 0;
+    LED2_LAT = 0;
+    LED3_LAT = 0;
+    LED4_LAT = 0;
+    LED5_LAT = 0;
+
+    /*
+       Encendido acumulativo:
+
+       1 LED  -> muy oscuro
+       2 LEDs -> poca luz
+       3 LEDs -> luz media
+       4 LEDs -> mucha luz
+       5 LEDs -> luz intensa
+    */
+
+    if (leds_count >= 1u)
     {
-        LED_LAT = 1;
+        LED1_LAT = 1;
     }
-    else
+
+    if (leds_count >= 2u)
     {
-        LED_LAT = 0;
+        LED2_LAT = 1;
+    }
+
+    if (leds_count >= 3u)
+    {
+        LED3_LAT = 1;
+    }
+
+    if (leds_count >= 4u)
+    {
+        LED4_LAT = 1;
+    }
+
+    if (leds_count >= 5u)
+    {
+        LED5_LAT = 1;
     }
 }
 
-static void Display_Update(uint16_t temperature_x10, uint16_t mq135_adc)
+/*
+   Procesamiento de componentes fisicos
+*/
+
+static void Process_Components(uint16_t light_adc)
+{
+    uint8_t light_level;
+    uint8_t leds_count;
+
+    light_level = Light_Get_Level(light_adc);
+    leds_count = Light_Get_Leds_Count(light_level);
+
+    Light_LEDs_Update(leds_count);
+}
+
+/*
+   Actualizacion de la pantalla OLED
+*/
+
+static void Display_Update(uint16_t temperature_x10,
+                           uint16_t mq135_adc,
+                           uint16_t light_adc)
 {
     char temp_text[8];
     char mq_text[6];
+    char light_text[6];
+
     uint8_t mq_level;
+    uint8_t light_level;
+    uint8_t leds_count;
 
     Temperature_To_String(temperature_x10, temp_text);
     UInt16_To_String(mq135_adc, mq_text);
+    UInt16_To_String(light_adc, light_text);
 
     mq_level = MQ135_Get_Level(mq135_adc);
+    light_level = Light_Get_Level(light_adc);
+    leds_count = Light_Get_Leds_Count(light_level);
+
+    /*
+       Linea 2:
+       Temperatura y MQ135
+    */
+
+    SSD1306_ClearLine(2);
+    SSD1306_SetCursor(0, 2);
+    SSD1306_WriteString("T:");
+    SSD1306_WriteString(temp_text);
+    SSD1306_WriteString("C MQ:");
+    SSD1306_WriteString(mq_text);
+
+    /*
+       Linea 3:
+       Estado del aire
+    */
 
     SSD1306_ClearLine(3);
     SSD1306_SetCursor(0, 3);
-    SSD1306_WriteString("TEMP: ");
-    SSD1306_WriteString(temp_text);
-    SSD1306_WriteString(" C");
+    SSD1306_WriteString(MQ135_Get_Text(mq_level));
+
+    /*
+       Linea 4:
+       Valor corregido del sensor de luz
+    */
 
     SSD1306_ClearLine(4);
     SSD1306_SetCursor(0, 4);
-    SSD1306_WriteString("MQ135: ");
-    SSD1306_WriteString(mq_text);
+    SSD1306_WriteString("LUZ ADC:");
+    SSD1306_WriteString(light_text);
+
+    /*
+       Linea 5:
+       Estado de iluminacion
+    */
 
     SSD1306_ClearLine(5);
     SSD1306_SetCursor(0, 5);
-    SSD1306_WriteString(MQ135_Get_Text(mq_level));
+    SSD1306_WriteString(Light_Get_Text(light_level));
+
+    /*
+       Linea 6:
+       LEDs encendidos
+    */
 
     SSD1306_ClearLine(6);
     SSD1306_SetCursor(0, 6);
-
-    if (mq135_adc >= MQ135_LED_ON_VALUE)
-    {
-        SSD1306_WriteString("LED ALARMA: ON");
-    }
-    else
-    {
-        SSD1306_WriteString("LED ALARMA: OFF");
-    }
+    SSD1306_WriteString("LEDS LUZ: ");
+    SSD1306_WriteChar((char)(leds_count + '0'));
+    SSD1306_WriteString("/5");
 }
+
+/*
+   Convertir uint16_t a texto
+*/
 
 static void UInt16_To_String(uint16_t value, char *buffer)
 {
@@ -220,21 +414,21 @@ static void UInt16_To_String(uint16_t value, char *buffer)
     uint8_t j = 0;
     char temp[6];
 
-    if (value == 0)
+    if (value == 0u)
     {
         buffer[0] = '0';
         buffer[1] = '\0';
         return;
     }
 
-    while (value > 0)
+    while (value > 0u)
     {
         temp[i] = (char)((value % 10u) + '0');
         value = value / 10u;
         i++;
     }
 
-    while (i > 0)
+    while (i > 0u)
     {
         i--;
         buffer[j] = temp[i];
@@ -243,6 +437,14 @@ static void UInt16_To_String(uint16_t value, char *buffer)
 
     buffer[j] = '\0';
 }
+
+/*
+   Convertir temperatura x10 a texto.
+
+   Ejemplo:
+   253 -> "25.3"
+   300 -> "30.0"
+*/
 
 static void Temperature_To_String(uint16_t temperature_x10, char *buffer)
 {

@@ -582,83 +582,86 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8891
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8891: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"10 adc.c
-[; ;adc.c: 10: void ADC_Init(void)
+"11 adc.c
+[; ;adc.c: 11: void ADC_Init(void)
 [v _ADC_Init `(v ~T0 @X0 1 ef ]
-"11
-[; ;adc.c: 11: {
+"12
+[; ;adc.c: 12: {
 {
 [e :U _ADC_Init ]
 [f ]
-"12
-[; ;adc.c: 12:     TRISAbits.TRISA0 = 1;
-[e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
 "13
-[; ;adc.c: 13:     TRISAbits.TRISA1 = 1;
+[; ;adc.c: 13:     TRISAbits.TRISA0 = 1;
+[e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
+"14
+[; ;adc.c: 14:     TRISAbits.TRISA1 = 1;
 [e = . . _TRISAbits 0 1 -> -> 1 `i `uc ]
-"21
-[; ;adc.c: 21:     ADCON0 = 0x01;
+"15
+[; ;adc.c: 15:     TRISAbits.TRISA2 = 1;
+[e = . . _TRISAbits 0 2 -> -> 1 `i `uc ]
+"17
+[; ;adc.c: 17:     ADCON0 = 0x01;
 [e = _ADCON0 -> -> 1 `i `uc ]
-"32
-[; ;adc.c: 32:     ADCON1 = 0x0D;
-[e = _ADCON1 -> -> 13 `i `uc ]
-"41
-[; ;adc.c: 41:     ADCON2 = 0xAA;
+"26
+[; ;adc.c: 26:     ADCON1 = 0x0C;
+[e = _ADCON1 -> -> 12 `i `uc ]
+"34
+[; ;adc.c: 34:     ADCON2 = 0xAA;
 [e = _ADCON2 -> -> 170 `i `uc ]
-"42
-[; ;adc.c: 42: }
+"35
+[; ;adc.c: 35: }
 [e :UE 391 ]
 }
-"44
-[; ;adc.c: 44: uint16_t ADC_Read(uint8_t channel)
+"37
+[; ;adc.c: 37: uint16_t ADC_Read(uint8_t channel)
 [v _ADC_Read `(us ~T0 @X0 1 ef1`uc ]
-"45
-[; ;adc.c: 45: {
+"38
+[; ;adc.c: 38: {
 {
 [e :U _ADC_Read ]
-"44
-[; ;adc.c: 44: uint16_t ADC_Read(uint8_t channel)
+"37
+[; ;adc.c: 37: uint16_t ADC_Read(uint8_t channel)
 [v _channel `uc ~T0 @X0 1 r1 ]
-"45
-[; ;adc.c: 45: {
+"38
+[; ;adc.c: 38: {
 [f ]
-"46
-[; ;adc.c: 46:     if (channel > 13)
+"39
+[; ;adc.c: 39:     if (channel > 13)
 [e $ ! > -> _channel `i -> 13 `i 393  ]
-"47
-[; ;adc.c: 47:     {
+"40
+[; ;adc.c: 40:     {
 {
-"48
-[; ;adc.c: 48:         channel = 0;
+"41
+[; ;adc.c: 41:         channel = 0;
 [e = _channel -> -> 0 `i `uc ]
-"49
-[; ;adc.c: 49:     }
+"42
+[; ;adc.c: 42:     }
 }
 [e :U 393 ]
-"51
-[; ;adc.c: 51:     ADCON0 &= 0xC3;
+"44
+[; ;adc.c: 44:     ADCON0 &= 0xC3;
 [e =& _ADCON0 -> -> 195 `i `Vuc ]
-"52
-[; ;adc.c: 52:     ADCON0 |= (uint8_t)(channel << 2);
+"45
+[; ;adc.c: 45:     ADCON0 |= (uint8_t)(channel << 2);
 [e =| _ADCON0 -> -> << -> _channel `i -> 2 `i `uc `Vuc ]
-"54
-[; ;adc.c: 54:     _delay((unsigned long)((30)*(8000000UL/4000000.0)));
+"47
+[; ;adc.c: 47:     _delay((unsigned long)((30)*(8000000UL/4000000.0)));
 [e ( __delay (1 -> * -> -> 30 `i `d / -> -> 8000000 `ul `d .4000000.0 `ul ]
-"56
-[; ;adc.c: 56:     ADCON0bits.GO_DONE = 1;
+"49
+[; ;adc.c: 49:     ADCON0bits.GO_DONE = 1;
 [e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-"58
-[; ;adc.c: 58:     while (ADCON0bits.GO_DONE);
+"51
+[; ;adc.c: 51:     while (ADCON0bits.GO_DONE);
 [e $U 394  ]
 [e :U 395 ]
 [e :U 394 ]
 [e $ != -> . . _ADCON0bits 2 1 `i -> 0 `i 395  ]
 [e :U 396 ]
-"60
-[; ;adc.c: 60:     return (((uint16_t)ADRESH << 8) | ADRESL);
+"53
+[; ;adc.c: 53:     return (((uint16_t)ADRESH << 8) | ADRESL);
 [e ) -> | << -> -> _ADRESH `us `ui -> 8 `i -> _ADRESL `ui `us ]
 [e $UE 392  ]
-"61
-[; ;adc.c: 61: }
+"54
+[; ;adc.c: 54: }
 [e :UE 392 ]
 }

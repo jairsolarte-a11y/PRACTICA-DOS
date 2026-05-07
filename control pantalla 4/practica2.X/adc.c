@@ -5,37 +5,30 @@
 
    AN0 / RA0 / pin 2 -> LM35
    AN1 / RA1 / pin 3 -> MQ135
+   AN2 / RA2 / pin 4 -> Sensor de luz HW-486
 */
 
 void ADC_Init(void)
 {
-    TRISAbits.TRISA0 = 1;   // AN0 entrada analogica
-    TRISAbits.TRISA1 = 1;   // AN1 entrada analogica
-
-    /*
-       ADCON0:
-       ADC encendido.
-       Canal inicial AN0.
-    */
+    TRISAbits.TRISA0 = 1;
+    TRISAbits.TRISA1 = 1;
+    TRISAbits.TRISA2 = 1;
 
     ADCON0 = 0x01;
 
     /*
-       ADCON1 = 0x0D
-
-       AN0 y AN1 analogicos.
+       AN0, AN1 y AN2 analogicos.
        Los demas pines quedan digitales.
-       VREF+ = VDD del PIC, normalmente 5V.
-       VREF- = VSS.
+       VREF+ = VDD = 5V.
+       VREF- = GND.
     */
 
-    ADCON1 = 0x0D;
+    ADCON1 = 0x0C;
 
     /*
-       ADCON2:
-       ADFM = 1   -> justificado a la derecha
-       ACQT = 101 -> 12 TAD
-       ADCS = 010 -> Fosc/32
+       Resultado justificado a la derecha.
+       Tiempo de adquisicion 12 TAD.
+       Reloj ADC Fosc/32.
     */
 
     ADCON2 = 0xAA;
