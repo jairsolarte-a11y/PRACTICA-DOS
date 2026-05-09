@@ -4,6 +4,7 @@
 #include "ssd1306.h"
 #include "mq135.h"
 #include "light_sensor.h"
+#include "buzzer.h"
 
 /*
    Canales ADC usados:
@@ -19,9 +20,6 @@
 
 /*
    Desplazamiento horizontal del texto en la OLED.
-
-   Si todavia se corta una letra, puedes subirlo a 10u.
-   Si queda muy a la derecha, puedes bajarlo a 6u.
 */
 
 #define OLED_X_OFFSET       8u
@@ -89,7 +87,9 @@ static uint16_t Read_LM35_Temperature_X10(void);
 
 static void Light_LEDs_Update(uint8_t leds_count);
 static void Temperature_LED_Update(uint16_t temperature_x10);
-static void Process_Components(uint16_t light_adc, uint16_t temperature_x10);
+static void Process_Components(uint16_t light_adc,
+                               uint16_t temperature_x10,
+                               uint16_t mq135_adc);
 
 static void Display_Update(uint16_t temperature_x10,
                            uint16_t mq135_adc,
@@ -140,20 +140,16 @@ void main(void)
 
            Primero se lee el valor real del ADC.
            Luego se procesa con Light_Process_ADC().
-
-           Esto corrige el caso del HW-486, donde normalmente:
-           - mucha luz da ADC bajo
-           - oscuridad da ADC alto
         */
 
         light_adc_raw = ADC_Read(LIGHT_CHANNEL);
         light_adc = Light_Process_ADC(light_adc_raw);
 
         /*
-           Actualizar LEDs fisicos.
+           Actualizar LEDs fisicos y buzzer.
         */
 
-        Process_Components(light_adc, temperature_x10);
+        Process_Components(light_adc, temperature_x10, mq135_adc);
 
         /*
            Actualizar OLED.
@@ -208,6 +204,13 @@ static void System_Init(void)
     TEMP_LED_LAT = 0;
 
     /*
+       Inicializar buzzer.
+       Buzzer -> RD6 / pin fisico 29.
+    */
+
+    Buzzer_Init();
+
+    /*
        Inicializar ADC.
 
        AN0 -> LM35
@@ -238,7 +241,7 @@ static void System_Init(void)
 }
 
 /*
-   Prueba inicial de LEDs
+   Prueba inicial de LEDs y buzzer
 */
 
 static void Startup_LED_Test(void)
@@ -267,7 +270,15 @@ static void Startup_LED_Test(void)
     */
 
     TEMP_LED_LAT = 1;
-    __delay_ms(300);
+    __delay_ms(200);
+
+    /*
+       Prueba del buzzer.
+    */
+
+    Buzzer_Set(1u);
+    __delay_ms(250);
+    Buzzer_Set(0u);
 
     LED1_LAT = 0;
     LED2_LAT = 0;
@@ -386,7 +397,9 @@ static void Temperature_LED_Update(uint16_t temperature_x10)
    Procesamiento de componentes fisicos
 */
 
-static void Process_Components(uint16_t light_adc, uint16_t temperature_x10)
+static void Process_Components(uint16_t light_adc,
+                               uint16_t temperature_x10,
+                               uint16_t mq135_adc)
 {
     uint8_t light_level;
     uint8_t leds_count;
@@ -405,6 +418,15 @@ static void Process_Components(uint16_t light_adc, uint16_t temperature_x10)
     */
 
     Temperature_LED_Update(temperature_x10);
+
+    /*
+       Buzzer del sensor MQ-135.
+
+       ON si MQ135 esta entre 801 y 1023.
+       OFF si MQ135 esta por debajo de 801.
+    */
+
+    Buzzer_Update_By_MQ135(mq135_adc);
 }
 
 /*
@@ -484,7 +506,7 @@ static void Display_Update(uint16_t temperature_x10,
 
     /*
        Linea 7:
-       Estado del LED de temperatura
+       Estado del LED de temperatura y buzzer
     */
 
     SSD1306_ClearLine(7);
@@ -492,11 +514,20 @@ static void Display_Update(uint16_t temperature_x10,
 
     if (temperature_x10 <= TEMP_LED_MAX_X10)
     {
-        SSD1306_WriteString("LED TEMP: ON ");
+        SSD1306_WriteString("TLED:ON ");
     }
     else
     {
-        SSD1306_WriteString("LED TEMP: OFF");
+        SSD1306_WriteString("TLED:OFF");
+    }
+
+    if (Buzzer_Should_Be_On(mq135_adc))
+    {
+        SSD1306_WriteString(" BZ:ON");
+    }
+    else
+    {
+        SSD1306_WriteString(" BZ:OFF");
     }
 }
 
