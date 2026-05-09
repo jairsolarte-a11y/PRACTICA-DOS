@@ -18,6 +18,15 @@
 #define LIGHT_CHANNEL       2u
 
 /*
+   Desplazamiento horizontal del texto en la OLED.
+
+   Si todavia se corta una letra, puedes subirlo a 10u.
+   Si queda muy a la derecha, puedes bajarlo a 6u.
+*/
+
+#define OLED_X_OFFSET       8u
+
+/*
    LEDs fisicos para representar intensidad de luz.
 
    LED 1 -> RD0 / pin 19
@@ -40,6 +49,27 @@
 #define LED5_TRIS           TRISDbits.TRISD4
 
 /*
+   LED indicador de temperatura.
+
+   LED_TEMP -> RD5 / pin fisico 28
+
+   Condicion:
+   ON  si temperatura esta entre 0 C y 38 C
+   OFF si temperatura es mayor a 38 C
+*/
+
+#define TEMP_LED_LAT        LATDbits.LATD5
+#define TEMP_LED_TRIS       TRISDbits.TRISD5
+
+/*
+   La temperatura se maneja multiplicada por 10.
+
+   38.0 C = 380
+*/
+
+#define TEMP_LED_MAX_X10    380u
+
+/*
    Referencia ADC.
 
    Si el PIC18F4550 esta alimentado con 5V
@@ -58,7 +88,8 @@ static void Startup_LED_Test(void);
 static uint16_t Read_LM35_Temperature_X10(void);
 
 static void Light_LEDs_Update(uint8_t leds_count);
-static void Process_Components(uint16_t light_adc);
+static void Temperature_LED_Update(uint16_t temperature_x10);
+static void Process_Components(uint16_t light_adc, uint16_t temperature_x10);
 
 static void Display_Update(uint16_t temperature_x10,
                            uint16_t mq135_adc,
@@ -84,10 +115,10 @@ void main(void)
 
     SSD1306_ClearDisplay();
 
-    SSD1306_SetCursor(0, 0);
+    SSD1306_SetCursor(OLED_X_OFFSET, 0);
     SSD1306_WriteString("SISTEMA AMBIENTAL");
 
-    SSD1306_SetCursor(0, 1);
+    SSD1306_SetCursor(OLED_X_OFFSET, 1);
     SSD1306_WriteString("LM35 MQ135 LUZ");
 
     while (1)
@@ -119,10 +150,10 @@ void main(void)
         light_adc = Light_Process_ADC(light_adc_raw);
 
         /*
-           Actualizar LEDs fisicos de acuerdo con la luz.
+           Actualizar LEDs fisicos.
         */
 
-        Process_Components(light_adc);
+        Process_Components(light_adc, temperature_x10);
 
         /*
            Actualizar OLED.
@@ -170,6 +201,13 @@ static void System_Init(void)
     LED5_LAT = 0;
 
     /*
+       Configurar LED de temperatura como salida.
+    */
+
+    TEMP_LED_TRIS = 0;
+    TEMP_LED_LAT = 0;
+
+    /*
        Inicializar ADC.
 
        AN0 -> LM35
@@ -205,6 +243,10 @@ static void System_Init(void)
 
 static void Startup_LED_Test(void)
 {
+    /*
+       Prueba de los 5 LEDs de luz.
+    */
+
     LED1_LAT = 1;
     __delay_ms(120);
 
@@ -218,6 +260,13 @@ static void Startup_LED_Test(void)
     __delay_ms(120);
 
     LED5_LAT = 1;
+    __delay_ms(120);
+
+    /*
+       Prueba del LED de temperatura.
+    */
+
+    TEMP_LED_LAT = 1;
     __delay_ms(300);
 
     LED1_LAT = 0;
@@ -225,6 +274,7 @@ static void Startup_LED_Test(void)
     LED3_LAT = 0;
     LED4_LAT = 0;
     LED5_LAT = 0;
+    TEMP_LED_LAT = 0;
 
     __delay_ms(200);
 }
@@ -314,18 +364,47 @@ static void Light_LEDs_Update(uint8_t leds_count)
 }
 
 /*
+   Control del LED de temperatura.
+
+   ON  si 0.0 C <= temperatura <= 38.0 C
+   OFF si temperatura > 38.0 C
+*/
+
+static void Temperature_LED_Update(uint16_t temperature_x10)
+{
+    if (temperature_x10 <= TEMP_LED_MAX_X10)
+    {
+        TEMP_LED_LAT = 1;
+    }
+    else
+    {
+        TEMP_LED_LAT = 0;
+    }
+}
+
+/*
    Procesamiento de componentes fisicos
 */
 
-static void Process_Components(uint16_t light_adc)
+static void Process_Components(uint16_t light_adc, uint16_t temperature_x10)
 {
     uint8_t light_level;
     uint8_t leds_count;
+
+    /*
+       LEDs del sensor de luz.
+    */
 
     light_level = Light_Get_Level(light_adc);
     leds_count = Light_Get_Leds_Count(light_level);
 
     Light_LEDs_Update(leds_count);
+
+    /*
+       LED de temperatura.
+    */
+
+    Temperature_LED_Update(temperature_x10);
 }
 
 /*
@@ -358,7 +437,7 @@ static void Display_Update(uint16_t temperature_x10,
     */
 
     SSD1306_ClearLine(2);
-    SSD1306_SetCursor(0, 2);
+    SSD1306_SetCursor(OLED_X_OFFSET, 2);
     SSD1306_WriteString("T:");
     SSD1306_WriteString(temp_text);
     SSD1306_WriteString("C MQ:");
@@ -370,7 +449,7 @@ static void Display_Update(uint16_t temperature_x10,
     */
 
     SSD1306_ClearLine(3);
-    SSD1306_SetCursor(0, 3);
+    SSD1306_SetCursor(OLED_X_OFFSET, 3);
     SSD1306_WriteString(MQ135_Get_Text(mq_level));
 
     /*
@@ -379,7 +458,7 @@ static void Display_Update(uint16_t temperature_x10,
     */
 
     SSD1306_ClearLine(4);
-    SSD1306_SetCursor(0, 4);
+    SSD1306_SetCursor(OLED_X_OFFSET, 4);
     SSD1306_WriteString("LUZ ADC:");
     SSD1306_WriteString(light_text);
 
@@ -389,19 +468,36 @@ static void Display_Update(uint16_t temperature_x10,
     */
 
     SSD1306_ClearLine(5);
-    SSD1306_SetCursor(0, 5);
+    SSD1306_SetCursor(OLED_X_OFFSET, 5);
     SSD1306_WriteString(Light_Get_Text(light_level));
 
     /*
        Linea 6:
-       LEDs encendidos
+       LEDs de luz
     */
 
     SSD1306_ClearLine(6);
-    SSD1306_SetCursor(0, 6);
-    SSD1306_WriteString("LEDS LUZ: ");
+    SSD1306_SetCursor(OLED_X_OFFSET, 6);
+    SSD1306_WriteString("LEDS LUZ:");
     SSD1306_WriteChar((char)(leds_count + '0'));
     SSD1306_WriteString("/5");
+
+    /*
+       Linea 7:
+       Estado del LED de temperatura
+    */
+
+    SSD1306_ClearLine(7);
+    SSD1306_SetCursor(OLED_X_OFFSET, 7);
+
+    if (temperature_x10 <= TEMP_LED_MAX_X10)
+    {
+        SSD1306_WriteString("LED TEMP: ON ");
+    }
+    else
+    {
+        SSD1306_WriteString("LED TEMP: OFF");
+    }
 }
 
 /*
@@ -444,6 +540,7 @@ static void UInt16_To_String(uint16_t value, char *buffer)
    Ejemplo:
    253 -> "25.3"
    300 -> "30.0"
+   380 -> "38.0"
 */
 
 static void Temperature_To_String(uint16_t temperature_x10, char *buffer)

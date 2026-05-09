@@ -5953,14 +5953,15 @@ uint8_t Light_Get_Level(uint16_t light_value);
 uint8_t Light_Get_Leds_Count(uint8_t level);
 const char* Light_Get_Text(uint8_t level);
 # 7 "main.c" 2
-# 55 "main.c"
+# 85 "main.c"
 static void System_Init(void);
 static void Startup_LED_Test(void);
 
 static uint16_t Read_LM35_Temperature_X10(void);
 
 static void Light_LEDs_Update(uint8_t leds_count);
-static void Process_Components(uint16_t light_adc);
+static void Temperature_LED_Update(uint16_t temperature_x10);
+static void Process_Components(uint16_t light_adc, uint16_t temperature_x10);
 
 static void Display_Update(uint16_t temperature_x10,
                            uint16_t mq135_adc,
@@ -5986,10 +5987,10 @@ void main(void)
 
     SSD1306_ClearDisplay();
 
-    SSD1306_SetCursor(0, 0);
+    SSD1306_SetCursor(8u, 0);
     SSD1306_WriteString("SISTEMA AMBIENTAL");
 
-    SSD1306_SetCursor(0, 1);
+    SSD1306_SetCursor(8u, 1);
     SSD1306_WriteString("LM35 MQ135 LUZ");
 
     while (1)
@@ -6005,7 +6006,7 @@ void main(void)
 
 
         mq135_adc = ADC_Read(1u);
-# 118 "main.c"
+# 149 "main.c"
         light_adc_raw = ADC_Read(2u);
         light_adc = Light_Process_ADC(light_adc_raw);
 
@@ -6013,7 +6014,7 @@ void main(void)
 
 
 
-        Process_Components(light_adc);
+        Process_Components(light_adc, temperature_x10);
 
 
 
@@ -6059,9 +6060,16 @@ static void System_Init(void)
     LATDbits.LATD2 = 0;
     LATDbits.LATD3 = 0;
     LATDbits.LATD4 = 0;
-# 180 "main.c"
+
+
+
+
+
+    TRISDbits.TRISD5 = 0;
+    LATDbits.LATD5 = 0;
+# 218 "main.c"
     ADC_Init();
-# 193 "main.c"
+# 231 "main.c"
     I2C_Master_Init(100000UL);
 
 
@@ -6077,6 +6085,10 @@ static void System_Init(void)
 
 static void Startup_LED_Test(void)
 {
+
+
+
+
     LATDbits.LATD0 = 1;
     _delay((unsigned long)((120)*(8000000UL/4000.0)));
 
@@ -6090,6 +6102,13 @@ static void Startup_LED_Test(void)
     _delay((unsigned long)((120)*(8000000UL/4000.0)));
 
     LATDbits.LATD4 = 1;
+    _delay((unsigned long)((120)*(8000000UL/4000.0)));
+
+
+
+
+
+    LATDbits.LATD5 = 1;
     _delay((unsigned long)((300)*(8000000UL/4000.0)));
 
     LATDbits.LATD0 = 0;
@@ -6097,6 +6116,7 @@ static void Startup_LED_Test(void)
     LATDbits.LATD2 = 0;
     LATDbits.LATD3 = 0;
     LATDbits.LATD4 = 0;
+    LATDbits.LATD5 = 0;
 
     _delay((unsigned long)((200)*(8000000UL/4000.0)));
 }
@@ -6111,7 +6131,7 @@ static uint16_t Read_LM35_Temperature_X10(void)
     uint32_t temperature_x10;
 
     adc_value = ADC_Read(0u);
-# 259 "main.c"
+# 309 "main.c"
     temperature_x10 = ((uint32_t)adc_value * 5000UL) / 1023UL;
 
     return (uint16_t)temperature_x10;
@@ -6132,7 +6152,7 @@ static void Light_LEDs_Update(uint8_t leds_count)
     LATDbits.LATD2 = 0;
     LATDbits.LATD3 = 0;
     LATDbits.LATD4 = 0;
-# 290 "main.c"
+# 340 "main.c"
     if (leds_count >= 1u)
     {
         LATDbits.LATD0 = 1;
@@ -6158,20 +6178,42 @@ static void Light_LEDs_Update(uint8_t leds_count)
         LATDbits.LATD4 = 1;
     }
 }
+# 373 "main.c"
+static void Temperature_LED_Update(uint16_t temperature_x10)
+{
+    if (temperature_x10 <= 380u)
+    {
+        LATDbits.LATD5 = 1;
+    }
+    else
+    {
+        LATDbits.LATD5 = 0;
+    }
+}
 
 
 
 
 
-static void Process_Components(uint16_t light_adc)
+static void Process_Components(uint16_t light_adc, uint16_t temperature_x10)
 {
     uint8_t light_level;
     uint8_t leds_count;
+
+
+
+
 
     light_level = Light_Get_Level(light_adc);
     leds_count = Light_Get_Leds_Count(light_level);
 
     Light_LEDs_Update(leds_count);
+
+
+
+
+
+    Temperature_LED_Update(temperature_x10);
 }
 
 
@@ -6204,7 +6246,7 @@ static void Display_Update(uint16_t temperature_x10,
 
 
     SSD1306_ClearLine(2);
-    SSD1306_SetCursor(0, 2);
+    SSD1306_SetCursor(8u, 2);
     SSD1306_WriteString("T:");
     SSD1306_WriteString(temp_text);
     SSD1306_WriteString("C MQ:");
@@ -6216,7 +6258,7 @@ static void Display_Update(uint16_t temperature_x10,
 
 
     SSD1306_ClearLine(3);
-    SSD1306_SetCursor(0, 3);
+    SSD1306_SetCursor(8u, 3);
     SSD1306_WriteString(MQ135_Get_Text(mq_level));
 
 
@@ -6225,7 +6267,7 @@ static void Display_Update(uint16_t temperature_x10,
 
 
     SSD1306_ClearLine(4);
-    SSD1306_SetCursor(0, 4);
+    SSD1306_SetCursor(8u, 4);
     SSD1306_WriteString("LUZ ADC:");
     SSD1306_WriteString(light_text);
 
@@ -6235,7 +6277,7 @@ static void Display_Update(uint16_t temperature_x10,
 
 
     SSD1306_ClearLine(5);
-    SSD1306_SetCursor(0, 5);
+    SSD1306_SetCursor(8u, 5);
     SSD1306_WriteString(Light_Get_Text(light_level));
 
 
@@ -6244,10 +6286,27 @@ static void Display_Update(uint16_t temperature_x10,
 
 
     SSD1306_ClearLine(6);
-    SSD1306_SetCursor(0, 6);
-    SSD1306_WriteString("LEDS LUZ: ");
+    SSD1306_SetCursor(8u, 6);
+    SSD1306_WriteString("LEDS LUZ:");
     SSD1306_WriteChar((char)(leds_count + '0'));
     SSD1306_WriteString("/5");
+
+
+
+
+
+
+    SSD1306_ClearLine(7);
+    SSD1306_SetCursor(8u, 7);
+
+    if (temperature_x10 <= 380u)
+    {
+        SSD1306_WriteString("LED TEMP: ON ");
+    }
+    else
+    {
+        SSD1306_WriteString("LED TEMP: OFF");
+    }
 }
 
 
@@ -6283,7 +6342,7 @@ static void UInt16_To_String(uint16_t value, char *buffer)
 
     buffer[j] = '\0';
 }
-# 449 "main.c"
+# 546 "main.c"
 static void Temperature_To_String(uint16_t temperature_x10, char *buffer)
 {
     uint16_t integer_part;
