@@ -7,6 +7,14 @@
 [v _ADC_Init ADC_Init `(v  1 e 1 0 ]
 "37
 [v _ADC_Read ADC_Read `(us  1 e 2 0 ]
+"10 C:\2026\Microcontroladores\control pantalla 4\practica2.X\buzzer.c
+[v _Buzzer_Init Buzzer_Init `(v  1 e 1 0 ]
+"16
+[v _Buzzer_Set Buzzer_Set `(v  1 e 1 0 ]
+"28
+[v _Buzzer_Should_Be_On Buzzer_Should_Be_On `(uc  1 e 1 0 ]
+"40
+[v _Buzzer_Update_By_MQ135 Buzzer_Update_By_MQ135 `(v  1 e 1 0 ]
 "7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\__lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
 "7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\aldiv.c
@@ -87,23 +95,23 @@
 [v _Light_Get_Text Light_Get_Text `(*.32Cuc  1 e 2 0 ]
 "105 C:\2026\Microcontroladores\control pantalla 4\practica2.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"172
+"168
 [v _System_Init System_Init `(v  1 s 1 System_Init ]
-"244
+"247
 [v _Startup_LED_Test Startup_LED_Test `(v  1 s 1 Startup_LED_Test ]
-"286
+"297
 [v _Read_LM35_Temperature_X10 Read_LM35_Temperature_X10 `(us  1 s 2 Read_LM35_Temperature_X10 ]
-"318
+"329
 [v _Light_LEDs_Update Light_LEDs_Update `(v  1 s 1 Light_LEDs_Update ]
-"373
+"384
 [v _Temperature_LED_Update Temperature_LED_Update `(v  1 s 1 Temperature_LED_Update ]
-"389
+"400
 [v _Process_Components Process_Components `(v  1 s 1 Process_Components ]
-"414
+"436
 [v _Display_Update Display_Update `(v  1 s 1 Display_Update ]
-"507
+"538
 [v _UInt16_To_String UInt16_To_String `(v  1 s 1 UInt16_To_String ]
-"546
+"577
 [v _Temperature_To_String Temperature_To_String `(v  1 s 1 Temperature_To_String ]
 "13 C:\2026\Microcontroladores\control pantalla 4\practica2.X\mq135.c
 [v _MQ135_Get_Level MQ135_Get_Level `(uc  1 e 1 0 ]
@@ -129,7 +137,7 @@
 [v _SSD1306_WriteString SSD1306_WriteString `(v  1 e 1 0 ]
 "273
 [v _SSD1306_Init SSD1306_Init `(v  1 e 1 0 ]
-[s S556 . 1 `uc 1 LATD0 1 0 :1:0 
+[s S557 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
 `uc 1 LATD3 1 0 :1:3 
@@ -139,7 +147,7 @@
 `uc 1 LATD7 1 0 :1:7 
 ]
 "3288 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h
-[s S565 . 1 `uc 1 LD0 1 0 :1:0 
+[s S566 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
 `uc 1 LD3 1 0 :1:3 
@@ -148,8 +156,8 @@
 `uc 1 LD6 1 0 :1:6 
 `uc 1 LD7 1 0 :1:7 
 ]
-[u S574 . 1 `S556 1 . 1 0 `S565 1 . 1 0 ]
-[v _LATDbits LATDbits `VES574  1 e 1 @3980 ]
+[u S575 . 1 `S557 1 . 1 0 `S566 1 . 1 0 ]
+[v _LATDbits LATDbits `VES575  1 e 1 @3980 ]
 [s S305 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
@@ -190,7 +198,7 @@
 ]
 [u S184 . 1 `S166 1 . 1 0 `S175 1 . 1 0 ]
 [v _TRISBbits TRISBbits `VES184  1 e 1 @3987 ]
-[s S516 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S517 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -200,7 +208,7 @@
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "4031
-[s S525 . 1 `uc 1 RD0 1 0 :1:0 
+[s S526 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -209,8 +217,8 @@
 `uc 1 RD6 1 0 :1:6 
 `uc 1 RD7 1 0 :1:7 
 ]
-[u S534 . 1 `S516 1 . 1 0 `S525 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES534  1 e 1 @3989 ]
+[u S535 . 1 `S517 1 . 1 0 `S526 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES535  1 e 1 @3989 ]
 [s S209 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
@@ -376,18 +384,18 @@
 {
 "110
 [v main@light_adc light_adc `us  1 a 2 69 ]
-"107
-[v main@temperature_x10 temperature_x10 `us  1 a 2 67 ]
-"109
-[v main@light_adc_raw light_adc_raw `us  1 a 2 65 ]
 "108
-[v main@mq135_adc mq135_adc `us  1 a 2 63 ]
-"166
+[v main@mq135_adc mq135_adc `us  1 a 2 67 ]
+"107
+[v main@temperature_x10 temperature_x10 `us  1 a 2 65 ]
+"109
+[v main@light_adc_raw light_adc_raw `us  1 a 2 63 ]
+"162
 } 0
-"172
+"168
 [v _System_Init System_Init `(v  1 s 1 System_Init ]
 {
-"238
+"241
 } 0
 "273 C:\2026\Microcontroladores\control pantalla 4\practica2.X\ssd1306.c
 [v _SSD1306_Init SSD1306_Init `(v  1 e 1 0 ]
@@ -409,24 +417,29 @@
 [v I2C_Master_Init@clock_hz clock_hz `ul  1 p 4 0 ]
 "32
 } 0
+"10 C:\2026\Microcontroladores\control pantalla 4\practica2.X\buzzer.c
+[v _Buzzer_Init Buzzer_Init `(v  1 e 1 0 ]
+{
+"14
+} 0
 "11 C:\2026\Microcontroladores\control pantalla 4\practica2.X\adc.c
 [v _ADC_Init ADC_Init `(v  1 e 1 0 ]
 {
 "35
 } 0
-"244 C:\2026\Microcontroladores\control pantalla 4\practica2.X\main.c
+"247 C:\2026\Microcontroladores\control pantalla 4\practica2.X\main.c
 [v _Startup_LED_Test Startup_LED_Test `(v  1 s 1 Startup_LED_Test ]
 {
-"280
+"291
 } 0
-"286
+"297
 [v _Read_LM35_Temperature_X10 Read_LM35_Temperature_X10 `(us  1 s 2 Read_LM35_Temperature_X10 ]
 {
-"289
+"300
 [v Read_LM35_Temperature_X10@temperature_x10 temperature_x10 `ul  1 a 4 27 ]
-"288
+"299
 [v Read_LM35_Temperature_X10@adc_value adc_value `us  1 a 2 31 ]
-"312
+"323
 } 0
 "15 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
@@ -459,32 +472,50 @@
 [v ADC_Read@channel channel `uc  1 p 1 4 ]
 "54
 } 1
-"389 C:\2026\Microcontroladores\control pantalla 4\practica2.X\main.c
+"400 C:\2026\Microcontroladores\control pantalla 4\practica2.X\main.c
 [v _Process_Components Process_Components `(v  1 s 1 Process_Components ]
 {
-"392
-[v Process_Components@leds_count leds_count `uc  1 a 1 7 ]
-"391
-[v Process_Components@light_level light_level `uc  1 a 1 6 ]
-"389
-[v Process_Components@light_adc light_adc `us  1 p 2 2 ]
-[v Process_Components@temperature_x10 temperature_x10 `us  1 p 2 4 ]
-"408
+"405
+[v Process_Components@leds_count leds_count `uc  1 a 1 12 ]
+"404
+[v Process_Components@light_level light_level `uc  1 a 1 11 ]
+"400
+[v Process_Components@light_adc light_adc `us  1 p 2 5 ]
+"401
+[v Process_Components@temperature_x10 temperature_x10 `us  1 p 2 7 ]
+"402
+[v Process_Components@mq135_adc mq135_adc `us  1 p 2 9 ]
+"430
 } 0
-"373
+"384
 [v _Temperature_LED_Update Temperature_LED_Update `(v  1 s 1 Temperature_LED_Update ]
 {
 [v Temperature_LED_Update@temperature_x10 temperature_x10 `us  1 p 2 0 ]
-"383
+"394
 } 0
-"318
+"329
 [v _Light_LEDs_Update Light_LEDs_Update `(v  1 s 1 Light_LEDs_Update ]
 {
 [v Light_LEDs_Update@leds_count leds_count `uc  1 p 1 wreg ]
 [v Light_LEDs_Update@leds_count leds_count `uc  1 p 1 wreg ]
-"324
+"335
 [v Light_LEDs_Update@leds_count leds_count `uc  1 p 1 0 ]
-"364
+"375
+} 1
+"40 C:\2026\Microcontroladores\control pantalla 4\practica2.X\buzzer.c
+[v _Buzzer_Update_By_MQ135 Buzzer_Update_By_MQ135 `(v  1 e 1 0 ]
+{
+[v Buzzer_Update_By_MQ135@mq135_adc mq135_adc `us  1 p 2 3 ]
+"43
+} 0
+"16
+[v _Buzzer_Set Buzzer_Set `(v  1 e 1 0 ]
+{
+[v Buzzer_Set@state state `uc  1 p 1 wreg ]
+[v Buzzer_Set@state state `uc  1 p 1 wreg ]
+"18
+[v Buzzer_Set@state state `uc  1 p 1 2 ]
+"26
 } 1
 "18 C:\2026\Microcontroladores\control pantalla 4\practica2.X\light_sensor.c
 [v _Light_Process_ADC Light_Process_ADC `(us  1 e 2 0 ]
@@ -495,58 +526,58 @@
 [v Light_Process_ADC@raw_adc raw_adc `us  1 p 2 0 ]
 "34
 } 0
-"414 C:\2026\Microcontroladores\control pantalla 4\practica2.X\main.c
+"436 C:\2026\Microcontroladores\control pantalla 4\practica2.X\main.c
 [v _Display_Update Display_Update `(v  1 s 1 Display_Update ]
 {
-"418
+"440
 [v Display_Update@temp_text temp_text `[8]uc  1 a 8 38 ]
-"420
+"442
 [v Display_Update@light_text light_text `[6]uc  1 a 6 52 ]
-"419
+"441
 [v Display_Update@mq_text mq_text `[6]uc  1 a 6 46 ]
-"423
+"445
 [v Display_Update@light_level light_level `uc  1 a 1 60 ]
-"424
+"446
 [v Display_Update@leds_count leds_count `uc  1 a 1 59 ]
-"422
+"444
 [v Display_Update@mq_level mq_level `uc  1 a 1 58 ]
-"414
+"436
 [v Display_Update@temperature_x10 temperature_x10 `us  1 p 2 32 ]
-"415
+"437
 [v Display_Update@mq135_adc mq135_adc `us  1 p 2 34 ]
-"416
+"438
 [v Display_Update@light_adc light_adc `us  1 p 2 36 ]
-"501
+"532
 } 0
-"546
+"577
 [v _Temperature_To_String Temperature_To_String `(v  1 s 1 Temperature_To_String ]
 {
-"550
+"581
 [v Temperature_To_String@integer_text integer_text `[6]uc  1 a 6 21 ]
-"549
+"580
 [v Temperature_To_String@decimal_part decimal_part `us  1 a 2 29 ]
-"548
+"579
 [v Temperature_To_String@integer_part integer_part `us  1 a 2 27 ]
-"551
+"582
 [v Temperature_To_String@i i `uc  1 a 1 31 ]
-"546
+"577
 [v Temperature_To_String@temperature_x10 temperature_x10 `us  1 p 2 18 ]
 [v Temperature_To_String@buffer buffer `*.30uc  1 p 1 20 ]
-"571
+"602
 } 0
-"507
+"538
 [v _UInt16_To_String UInt16_To_String `(v  1 s 1 UInt16_To_String ]
 {
-"511
+"542
 [v UInt16_To_String@temp temp `[6]uc  1 a 6 10 ]
-"509
+"540
 [v UInt16_To_String@i i `uc  1 a 1 17 ]
-"510
+"541
 [v UInt16_To_String@j j `uc  1 a 1 16 ]
-"507
+"538
 [v UInt16_To_String@value value `us  1 p 2 7 ]
 [v UInt16_To_String@buffer buffer `*.30uc  1 p 1 9 ]
-"535
+"566
 } 0
 "7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
@@ -702,3 +733,9 @@
 [v Light_Get_Leds_Count@level level `uc  1 p 1 0 ]
 "92
 } 1
+"28 C:\2026\Microcontroladores\control pantalla 4\practica2.X\buzzer.c
+[v _Buzzer_Should_Be_On Buzzer_Should_Be_On `(uc  1 e 1 0 ]
+{
+[v Buzzer_Should_Be_On@mq135_adc mq135_adc `us  1 p 2 0 ]
+"38
+} 0
