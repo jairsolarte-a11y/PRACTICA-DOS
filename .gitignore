@@ -1,0 +1,14 @@
+build/
+dist/
+debug/
+*.o
+*.elf
+*.hex
+*.map
+*.lst
+*.cod
+*.cof
+*.d
+*.obj
+*.tmp
+*.log
