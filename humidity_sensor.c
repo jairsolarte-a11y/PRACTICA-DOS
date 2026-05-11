@@ -7,7 +7,7 @@
 
 uint8_t Humidity_Get_Percentage(uint16_t humidity_adc)
 {
-    return (uint8_t)((humidity_adc * 100u) / 1023u);
+    return (uint8_t)(((uint32_t)humidity_adc * 100UL) / 1023UL);
 }
 
 /*
@@ -20,7 +20,7 @@ uint8_t Humidity_Should_Turn_Fan_On(uint16_t humidity_adc)
 
     porcentaje = Humidity_Get_Percentage(humidity_adc);
 
-    if (porcentaje >= 60u)
+ if (porcentaje >= HUMIDITY_FAN_ON_PERCENT)
     {
         return 1u;
     }
