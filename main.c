@@ -10,29 +10,24 @@
 
 #include <stdio.h>
 
-/*
-   Canales ADC usados:
-
-   AN0 / RA0 / pin 2 -> LM35
-   AN1 / RA1 / pin 3 -> MQ135
-   AN2 / RA2 / pin 4 -> Sensor de luz HW-486
-   AN3 / RA3 / pin 5 -> Sensor de humedad analogico
-*/
+/*========================================================
+    CANALES ADC
+========================================================*/
 
 #define LM35_CHANNEL        0u
 #define MQ135_CHANNEL       1u
 #define LIGHT_CHANNEL       2u
 #define HUMIDITY_CHANNEL    3u
 
-/*
-   Desplazamiento horizontal OLED.
-*/
+/*========================================================
+    OLED
+========================================================*/
 
 #define OLED_X_OFFSET       8u
 
-/*
-   LEDs de intensidad de luz.
-*/
+/*========================================================
+    LEDs DE LUZ
+========================================================*/
 
 #define LED1_LAT            LATDbits.LATD0
 #define LED2_LAT            LATDbits.LATD1
@@ -46,31 +41,46 @@
 #define LED4_TRIS           TRISDbits.TRISD3
 #define LED5_TRIS           TRISDbits.TRISD4
 
-/*
-   LED temperatura.
-*/
+/*========================================================
+    LED TEMPERATURA
+========================================================*/
 
 #define TEMP_LED_LAT        LATDbits.LATD5
 #define TEMP_LED_TRIS       TRISDbits.TRISD5
 
 #define TEMP_LED_MAX_X10    380u
 
-/*
-   Referencia ADC.
-*/
+/*========================================================
+    ADC
+========================================================*/
 
 #define ADC_VREF_MV         5000UL
 
-/*
-   Prototipos.
-*/
+/*========================================================
+    TIEMPOS
+========================================================*/
+
+#define MAIN_LOOP_DELAY_MS  600u
+#define STARTUP_LED_DELAY   100u
+
+/*========================================================
+    PROTOTIPOS
+========================================================*/
 
 static void System_Init(void);
 static void Startup_Test(void);
+static void Startup_Light_Sequence(void);
+
+static void Read_Sensors(uint16_t *temperature_x10,
+                         uint16_t *mq135_adc,
+                         uint16_t *light_adc,
+                         uint16_t *humidity_adc);
 
 static uint16_t Read_LM35_Temperature_X10(void);
 
+static void Light_LEDs_All_Off(void);
 static void Light_LEDs_Update(uint8_t leds_count);
+
 static void Temperature_LED_Update(uint16_t temperature_x10);
 
 static uint8_t Fan_Get_Speed_By_MQ135_And_Humidity(uint16_t mq135_adc,
@@ -79,16 +89,38 @@ static uint8_t Fan_Get_Speed_By_MQ135_And_Humidity(uint16_t mq135_adc,
 static uint8_t Process_Components(uint16_t light_adc,
                                   uint16_t temperature_x10,
                                   uint16_t mq135_adc,
-                                  uint16_t humidity_adc);
+                                  uint16_t humidity_adc,
+                                  uint8_t *light_level,
+                                  uint8_t *leds_count);
+
+static void OLED_Prepare_Line(uint8_t line);
+
+static void Display_Header(void);
+
+static void Display_Temperature_Line(uint16_t temperature_x10,
+                                     uint16_t humidity_adc);
+
+static void Display_MQ135_Line(uint16_t mq135_adc);
+
+static void Display_Light_Line(uint16_t light_adc,
+                               uint8_t light_level);
+
+static void Display_Status_Line(uint16_t temperature_x10,
+                                uint16_t mq135_adc,
+                                uint8_t leds_count,
+                                uint8_t fan_speed);
 
 static void Display_Update(uint16_t temperature_x10,
                            uint16_t mq135_adc,
                            uint16_t light_adc,
                            uint16_t humidity_adc,
+                           uint8_t light_level,
+                           uint8_t leds_count,
                            uint8_t fan_speed);
 
 static void UInt16_To_String(uint16_t value, char *buffer);
-static void Temperature_To_String(uint16_t temperature_x10, char *buffer);
+static void Temperature_To_String(uint16_t temperature_x10,
+                                  char *buffer);
 
 /*========================================================*/
 
@@ -96,71 +128,42 @@ void main(void)
 {
     uint16_t temperature_x10;
     uint16_t mq135_adc;
-    uint16_t light_adc_raw;
     uint16_t light_adc;
     uint16_t humidity_adc;
+
     uint8_t fan_speed;
+    uint8_t light_level;
+    uint8_t leds_count;
 
     System_Init();
 
     Startup_Test();
 
-    SSD1306_ClearDisplay();
-
-    SSD1306_SetCursor(OLED_X_OFFSET, 0);
-    SSD1306_WriteString("SISTEMA AMBIENTAL");
-
-    SSD1306_SetCursor(OLED_X_OFFSET, 1);
-    SSD1306_WriteString("LM35 MQ LUZ HUM");
+    Display_Header();
 
     while (1)
     {
-        /*
-           LM35.
-        */
-
-        temperature_x10 = Read_LM35_Temperature_X10();
-
-        /*
-           MQ135.
-        */
-
-        mq135_adc = ADC_Read(MQ135_CHANNEL);
-
-        /*
-           Sensor de luz.
-        */
-
-        light_adc_raw = ADC_Read(LIGHT_CHANNEL);
-
-        light_adc = Light_Process_ADC(light_adc_raw);
-
-        /*
-           Sensor humedad.
-        */
-
-        humidity_adc = ADC_Read(HUMIDITY_CHANNEL);
-
-        /*
-           Actualizar componentes.
-        */
+        Read_Sensors(&temperature_x10,
+                     &mq135_adc,
+                     &light_adc,
+                     &humidity_adc);
 
         fan_speed = Process_Components(light_adc,
                                        temperature_x10,
                                        mq135_adc,
-                                       humidity_adc);
-
-        /*
-           Actualizar OLED.
-        */
+                                       humidity_adc,
+                                       &light_level,
+                                       &leds_count);
 
         Display_Update(temperature_x10,
                        mq135_adc,
                        light_adc,
                        humidity_adc,
+                       light_level,
+                       leds_count,
                        fan_speed);
 
-        __delay_ms(600);
+        __delay_ms(MAIN_LOOP_DELAY_MS);
     }
 }
 
@@ -174,53 +177,25 @@ static void System_Init(void)
 
     CVRCON = 0x00;
 
-    /*
-       LEDs luz.
-    */
-
     LED1_TRIS = 0;
     LED2_TRIS = 0;
     LED3_TRIS = 0;
     LED4_TRIS = 0;
     LED5_TRIS = 0;
 
-    LED1_LAT = 0;
-    LED2_LAT = 0;
-    LED3_LAT = 0;
-    LED4_LAT = 0;
-    LED5_LAT = 0;
-
-    /*
-       LED temperatura.
-    */
-
     TEMP_LED_TRIS = 0;
+
+    Light_LEDs_All_Off();
 
     TEMP_LED_LAT = 0;
 
-    /*
-       Buzzer.
-    */
-
     Buzzer_Init();
 
-    /*
-       ADC.
-    */
-
     ADC_Init();
-
-    /*
-       I2C OLED.
-    */
 
     I2C_Master_Init(100000UL);
 
     SSD1306_Init();
-
-    /*
-       PWM ventilador.
-    */
 
     Fan_PWM_Init();
 }
@@ -229,25 +204,14 @@ static void System_Init(void)
 
 static void Startup_Test(void)
 {
-    LED1_LAT = 1;
-    __delay_ms(100);
-
-    LED2_LAT = 1;
-    __delay_ms(100);
-
-    LED3_LAT = 1;
-    __delay_ms(100);
-
-    LED4_LAT = 1;
-    __delay_ms(100);
-
-    LED5_LAT = 1;
-    __delay_ms(100);
+    Startup_Light_Sequence();
 
     TEMP_LED_LAT = 1;
+
     __delay_ms(200);
 
     Buzzer_Set(1u);
+
     __delay_ms(200);
 
     Buzzer_Set(0u);
@@ -258,15 +222,51 @@ static void Startup_Test(void)
 
     Fan_Set_Speed(FAN_SPEED_OFF);
 
-    LED1_LAT = 0;
-    LED2_LAT = 0;
-    LED3_LAT = 0;
-    LED4_LAT = 0;
-    LED5_LAT = 0;
+    Light_LEDs_All_Off();
 
     TEMP_LED_LAT = 0;
 
     __delay_ms(200);
+}
+
+/*========================================================*/
+
+static void Startup_Light_Sequence(void)
+{
+    LED1_LAT = 1;
+    __delay_ms(STARTUP_LED_DELAY);
+
+    LED2_LAT = 1;
+    __delay_ms(STARTUP_LED_DELAY);
+
+    LED3_LAT = 1;
+    __delay_ms(STARTUP_LED_DELAY);
+
+    LED4_LAT = 1;
+    __delay_ms(STARTUP_LED_DELAY);
+
+    LED5_LAT = 1;
+    __delay_ms(STARTUP_LED_DELAY);
+}
+
+/*========================================================*/
+
+static void Read_Sensors(uint16_t *temperature_x10,
+                         uint16_t *mq135_adc,
+                         uint16_t *light_adc,
+                         uint16_t *humidity_adc)
+{
+    uint16_t light_adc_raw;
+
+    *temperature_x10 = Read_LM35_Temperature_X10();
+
+    *mq135_adc = ADC_Read(MQ135_CHANNEL);
+
+    light_adc_raw = ADC_Read(LIGHT_CHANNEL);
+
+    *light_adc = Light_Process_ADC(light_adc_raw);
+
+    *humidity_adc = ADC_Read(HUMIDITY_CHANNEL);
 }
 
 /*========================================================*/
@@ -287,13 +287,20 @@ static uint16_t Read_LM35_Temperature_X10(void)
 
 /*========================================================*/
 
-static void Light_LEDs_Update(uint8_t leds_count)
+static void Light_LEDs_All_Off(void)
 {
     LED1_LAT = 0;
     LED2_LAT = 0;
     LED3_LAT = 0;
     LED4_LAT = 0;
     LED5_LAT = 0;
+}
+
+/*========================================================*/
+
+static void Light_LEDs_Update(uint8_t leds_count)
+{
+    Light_LEDs_All_Off();
 
     if (leds_count >= 1u)
     {
@@ -360,19 +367,17 @@ static uint8_t Fan_Get_Speed_By_MQ135_And_Humidity(uint16_t mq135_adc,
 static uint8_t Process_Components(uint16_t light_adc,
                                   uint16_t temperature_x10,
                                   uint16_t mq135_adc,
-                                  uint16_t humidity_adc)
+                                  uint16_t humidity_adc,
+                                  uint8_t *light_level,
+                                  uint8_t *leds_count)
 {
-    uint8_t light_level;
-
-    uint8_t leds_count;
-
     uint8_t fan_speed;
 
-    light_level = Light_Get_Level(light_adc);
+    *light_level = Light_Get_Level(light_adc);
 
-    leds_count = Light_Get_Leds_Count(light_level);
+    *leds_count = Light_Get_Leds_Count(*light_level);
 
-    Light_LEDs_Update(leds_count);
+    Light_LEDs_Update(*leds_count);
 
     Temperature_LED_Update(temperature_x10);
 
@@ -389,103 +394,93 @@ static uint8_t Process_Components(uint16_t light_adc,
 
 /*========================================================*/
 
-static void Display_Update(uint16_t temperature_x10,
-                           uint16_t mq135_adc,
-                           uint16_t light_adc,
-                           uint16_t humidity_adc,
-                           uint8_t fan_speed)
+static void OLED_Prepare_Line(uint8_t line)
+{
+    SSD1306_ClearLine(line);
+
+    SSD1306_SetCursor(OLED_X_OFFSET, line);
+}
+
+/*========================================================*/
+
+static void Display_Header(void)
+{
+    SSD1306_ClearDisplay();
+
+    OLED_Prepare_Line(0);
+    SSD1306_WriteString("SISTEMA AMBIENTAL");
+
+    OLED_Prepare_Line(1);
+    SSD1306_WriteString("LM35 MQ LUZ HUM");
+}
+
+/*========================================================*/
+
+static void Display_Temperature_Line(uint16_t temperature_x10,
+                                     uint16_t humidity_adc)
 {
     char temp_text[8];
 
+    Temperature_To_String(temperature_x10,
+                          temp_text);
+
+    OLED_Prepare_Line(2);
+
+    SSD1306_WriteString("T:");
+    SSD1306_WriteString(temp_text);
+    SSD1306_WriteString("C ");
+    SSD1306_WriteString(Humidity_Get_Text(humidity_adc));
+}
+
+/*========================================================*/
+
+static void Display_MQ135_Line(uint16_t mq135_adc)
+{
     char mq_text[6];
-
-    char light_text[6];
-
-    char humidity_text[15];
 
     uint8_t mq_level;
 
-    uint8_t light_level;
-
-    uint8_t leds_count;
-
-    Temperature_To_String(temperature_x10, temp_text);
-
-    UInt16_To_String(mq135_adc, mq_text);
-
-    UInt16_To_String(light_adc, light_text);
-
-    sprintf(humidity_text,
-            "%s",
-            Humidity_Get_Text(humidity_adc));
+    UInt16_To_String(mq135_adc,
+                     mq_text);
 
     mq_level = MQ135_Get_Level(mq135_adc);
 
-    light_level = Light_Get_Level(light_adc);
-
-    leds_count = Light_Get_Leds_Count(light_level);
-
-    /*
-       Linea 2.
-    */
-
-    SSD1306_ClearLine(2);
-
-    SSD1306_SetCursor(OLED_X_OFFSET, 2);
-
-    SSD1306_WriteString("T:");
-
-    SSD1306_WriteString(temp_text);
-
-    SSD1306_WriteString("C ");
-
-    SSD1306_WriteString(humidity_text);
-
-    /*
-       Linea 3.
-    */
-
-    SSD1306_ClearLine(3);
-
-    SSD1306_SetCursor(OLED_X_OFFSET, 3);
+    OLED_Prepare_Line(3);
 
     SSD1306_WriteString("MQ:");
-
     SSD1306_WriteString(mq_text);
-
     SSD1306_WriteString(" ");
-
     SSD1306_WriteString(MQ135_Get_Text(mq_level));
+}
 
-    /*
-       Linea 4.
-    */
+/*========================================================*/
 
-    SSD1306_ClearLine(4);
+static void Display_Light_Line(uint16_t light_adc,
+                               uint8_t light_level)
+{
+    char light_text[6];
 
-    SSD1306_SetCursor(OLED_X_OFFSET, 4);
+    UInt16_To_String(light_adc,
+                     light_text);
+
+    OLED_Prepare_Line(4);
 
     SSD1306_WriteString("LUZ:");
-
     SSD1306_WriteString(light_text);
 
-    /*
-       Linea 5.
-    */
-
-    SSD1306_ClearLine(5);
-
-    SSD1306_SetCursor(OLED_X_OFFSET, 5);
+    OLED_Prepare_Line(5);
 
     SSD1306_WriteString(Light_Get_Text(light_level));
+}
 
-    /*
-       Linea 6.
-    */
+/*========================================================*/
 
-    SSD1306_ClearLine(6);
-
-    SSD1306_SetCursor(OLED_X_OFFSET, 6);
+static void Display_Status_Line(uint16_t temperature_x10,
+                                uint16_t mq135_adc,
+                                uint8_t leds_count,
+                                uint8_t fan_speed)
+{
+    OLED_Prepare_Line(6);
 
     SSD1306_WriteString("L:");
 
@@ -502,13 +497,7 @@ static void Display_Update(uint16_t temperature_x10,
         SSD1306_WriteString("TLED:OFF");
     }
 
-    /*
-       Linea 7.
-    */
-
-    SSD1306_ClearLine(7);
-
-    SSD1306_SetCursor(OLED_X_OFFSET, 7);
+    OLED_Prepare_Line(7);
 
     if (Buzzer_Should_Be_On(mq135_adc))
     {
@@ -536,10 +525,35 @@ static void Display_Update(uint16_t temperature_x10,
         SSD1306_WriteString("FAN:V3");
     }
 }
+ 
+/*========================================================*/
+
+static void Display_Update(uint16_t temperature_x10,
+                           uint16_t mq135_adc,
+                           uint16_t light_adc,
+                           uint16_t humidity_adc,
+                           uint8_t light_level,
+                           uint8_t leds_count,
+                           uint8_t fan_speed)
+{
+    Display_Temperature_Line(temperature_x10,
+                             humidity_adc);
+
+    Display_MQ135_Line(mq135_adc);
+
+    Display_Light_Line(light_adc,
+                       light_level);
+
+    Display_Status_Line(temperature_x10,
+                        mq135_adc,
+                        leds_count,
+                        fan_speed);
+}
 
 /*========================================================*/
 
-static void UInt16_To_String(uint16_t value, char *buffer)
+static void UInt16_To_String(uint16_t value,
+                             char *buffer)
 {
     uint8_t i = 0;
 
@@ -594,7 +608,8 @@ static void Temperature_To_String(uint16_t temperature_x10,
 
     decimal_part = temperature_x10 % 10u;
 
-    UInt16_To_String(integer_part, integer_text);
+    UInt16_To_String(integer_part,
+                     integer_text);
 
     while (integer_text[i] != '\0')
     {
@@ -612,4 +627,4 @@ static void Temperature_To_String(uint16_t temperature_x10,
     i++;
 
     buffer[i] = '\0';
-}  
+}
