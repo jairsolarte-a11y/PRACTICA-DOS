@@ -14,7 +14,7 @@
    501-1023  -> ventilador encendido por humedad
 */
 
-#define HUMIDITY_FAN_ON_MIN     501u
+#define HUMIDITY_FAN_ON_PERCENT     60u
 
 uint8_t Humidity_Should_Turn_Fan_On(uint16_t humidity_adc);
 const char* Humidity_Get_Text(uint16_t humidity_adc);
